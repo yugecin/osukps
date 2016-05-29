@@ -13,7 +13,7 @@ Right click to access a menu that does stuff (add/remove buttons, exit).
 Click a button (blue square) to assign a key to it.
 
 ###Changelog
-######160628
+######160528
 * Initial release
 
 ###Todo's
