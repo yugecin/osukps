@@ -1,6 +1,6 @@
 
 ###Hi!
-Hi, yugecin. I'm looked for osu kpm tool, I found this useful tool and i edit project to make more conveniently.
+Hi, yugecin. I'm looked for osu kps tool, I found this useful tool and i edit project to make more conveniently.
 and I'm using github for the first time, if i making a trouble or wrong behavior, try that i shouldn't do it than tell me. i'll down this branch. thank you!
 
 + Sorry for bad english, I'm korean so i don't have good english
@@ -24,7 +24,7 @@ Click a button (blue square) to assign a key to it.
 * Initial release
 
 ######160904
-* dnjstlr555:Add maxkpm, fix bugs
+* dnjstlr555:Add maxkps, fix bugs
 
 ###Todo's
 * save settings
