@@ -22,8 +22,10 @@ Click a button (blue square) to assign a key to it.
 ###Changelog
 ######160528
 * Initial release
+
 ######160904
 * dnjstlr555:Add maxkpm, fix bugs
+
 ###Todo's
 * save settings
 * adjustable button colors
