@@ -1,17 +1,18 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace osukps
 {
+    
 	public class KpsButton : Panel
 	{
 
 		private Label label;
-
 		public IKeyHandler Handler { get; set; }
 		private int color;
 		private bool state;
+        private int key;
 
 		public KpsButton( int position )
 		{
@@ -24,6 +25,16 @@ namespace osukps
 			Handler = NoKeyHandler.Get();
 			UpdateColor();
 		}
+
+        public void KeySetup ( int k )
+        {
+            Handler = new DefKeyHandler(k);
+        }
+
+        public void LabelSetup ( string t )
+        {
+            label.Text = t;
+        }
 
 		private void createPanel()
 		{
@@ -50,11 +61,25 @@ namespace osukps
 			Controls.Add( label );
 		}
 
+
+
 		private void KpsButton_Click( object sender, EventArgs e )
 		{
-			Handler = frmGetKey.GetKey( Handler, PointToScreen( new Point( Width / 2, Height / 2) ) );
-			frmGetKey.UpdateLabel( label );
+			Handler = frmGetKey.GetKey( Handler, PointToScreen( new Point( Width / 2, Height / 2 - 150) ) );
+            key = frmGetKey.yourkey(); //get my key id
+            frmGetKey.UpdateLabel( label );
 		}
+
+        //for save key id and label text
+        public int mykey()
+        {
+            return key;
+        }
+
+        public string mystring()
+        {
+            return label.Text;
+        }
 
 		public byte Process()
 		{
