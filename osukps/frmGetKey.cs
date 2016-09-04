@@ -8,9 +8,9 @@ namespace osukps
 	{
 
 		private static frmGetKey instance = new frmGetKey();
-        int d=1;
-        string tmp;
-        int key;
+
+        	int first=1;
+
 		public static IKeyHandler GetKey( IKeyHandler handler, Point p )
 		{
 			instance.Position = p;
@@ -22,7 +22,12 @@ namespace osukps
 			return new DefKeyHandler( instance.KeyCode );
 		}
 
-		public static void UpdateLabel( Label lbl )
+        public static int yourkey() //return key to instance
+        {
+            return instance.KeyCode;
+        }
+
+		public static void UpdateLabel( Label lbl ) 
 		{
 			if( !instance.Cancelled )
 			{
@@ -61,20 +66,23 @@ namespace osukps
 
 		private void frmGetKey_KeyUp( object sender, KeyEventArgs e )
 		{
-            if (d==1)
+            if (first==1) //first keydown check
             {
                 if (txtKey.Focused)
                 {
                     return;
                 }
+                var tmp=""; 
+                var key=0;
                 key = (int)e.KeyCode;
                 tmp = (new KeysConverter()).ConvertToString(key);
-                if (tmp == "ProcessKey") { } else {
+
+                if (tmp == "ProcessKey") { } else { //valid keycode check
                     KeyCode = (int)e.KeyCode;
                     lblKey.Text = (new KeysConverter()).ConvertToString(KeyCode);
                     txtKey.Text = lblKey.Text;
                     e.Handled = true;
-                    d = 0;
+                    first = 0;
                 }
             }
 		}
@@ -85,7 +93,7 @@ namespace osukps
 			lblKey.Text = "[ Press a key ]";
 			txtKey.Text = "";
 			Cancelled = true;
-            d = 1;
+            		first = 1;
 		}
 
         private void lblKey_Click(object sender, EventArgs e)
