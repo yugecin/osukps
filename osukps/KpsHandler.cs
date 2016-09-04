@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace osukps
@@ -43,10 +43,6 @@ namespace osukps
 			UpdateLabels();
 		}
 
-        public void resetmax()
-        {
-            max = 0;
-        }
 		private void UpdateLabels()
 		{
 			byte kps = this.kps[index];
@@ -83,5 +79,11 @@ namespace osukps
 			UpdateLabels();
 		}
 
-	}
+        public void resetmax()
+        {
+            max = 0;
+            UpdateLabels();
+        }
+
+    }
 }
