@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace osukps
@@ -11,6 +11,7 @@ namespace osukps
 		private byte index;
 		private byte[] kps;
 		private int total;
+        private int max=0;
 
 		public KpsHandler( Label lblKps, Label lblTotal )
 		{
@@ -42,9 +43,17 @@ namespace osukps
 			UpdateLabels();
 		}
 
+        public void resetmax()
+        {
+            max = 0;
+        }
 		private void UpdateLabels()
 		{
 			byte kps = this.kps[index];
+            if(kps>max)
+            {
+                max = kps;
+            }
 			if( kps >= 10 )
 			{
 				lblKps.ForeColor = Color.FromArgb( 255, 248, 0, 0 );
@@ -58,8 +67,14 @@ namespace osukps
 				lblKps.ForeColor = Color.White;
 			}
 
-			lblKps.Text = string.Format( "{0} Kps", kps );
-			lblTotal.Text = total.ToString();
+            if (kps == 0) {
+                lblKps.Text = string.Format("{0} Max", max);
+            }
+            else lblKps.Text = string.Format("{0} Kps", kps);
+
+            lblTotal.Text = total.ToString();
+            
+            //frmMain.kpsmax(kps);
 		}
 
 		public void ResetTotal()
