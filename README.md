@@ -24,10 +24,9 @@ Click a button (blue square) to assign a key to it.
 * Initial release
 
 ######160904
-* dnjstlr555:Add maxkps, fix bugs
+* dnjstlr555:Add maxkps, key load and save, fix bugs
 
 ###Todo's
-* save settings
 * adjustable button colors
 * adjustable kps colors
 
