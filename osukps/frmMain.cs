@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace osukps
@@ -9,7 +10,6 @@ namespace osukps
 	{
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
-        public int[] key;
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
 		private byte buttonCount;
@@ -37,12 +37,15 @@ namespace osukps
 			}
 			SetButtonCount( INITIAL_BUTTONS );
 		}
+
+        #region inidll
         [DllImport("kernel32")]
         private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
         [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section, string key, string def, int size, string filePath);
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        #endregion
 
-#region dragcodez
+        #region dragcodez
         private bool moveForm;
 		private Point moveOffset;
 
@@ -65,10 +68,7 @@ namespace osukps
 			}
 		}
         #endregion
-        public int kpsmax(int max)
-        {
-            return 1;
-        }
+
 		private void tmrProcess_Tick( object sender, EventArgs e )
 		{
 			byte keyCount = 0;
@@ -79,7 +79,7 @@ namespace osukps
 			kpsHandler.Update( keyCount );
 		}
 
-		private void SetButtonCount( byte buttonCount)
+		private void SetButtonCount( byte buttonCount )
 		{
 			this.buttonCount = Math.Max( (byte) 1, Math.Min( MAX_BUTTONS, buttonCount ) );
 			for (int i = 0; i < MAX_BUTTONS; i++)
@@ -124,10 +124,18 @@ namespace osukps
         {
 
             WritePrivateProfileString("Count", "count", buttonCount.ToString(), "./setting.ini");
+
             for (var i = 0; i < buttonCount; i++)
             {
-                WritePrivateProfileString("INIT_PATH", "key" + (i+1), "Testing" , "./setting.ini");
+                var b = btns[i].mykey();
+                WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString() , "./setting.ini");
             }
+            for (var i = 0; i < buttonCount; i++)
+            {
+                var b = btns[i].mystring();
+                WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), "./setting.ini");
+            }
+            MessageBox.Show("Complete!");
         }
 
         private void pnlInfo_Paint(object sender, PaintEventArgs e)
@@ -135,14 +143,31 @@ namespace osukps
 
         }
 
-        private void tmrMax_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             kpsHandler.resetmax();
+        }
+
+        private void loadKeySetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tmp=0;
+            StringBuilder temp = new StringBuilder(255);
+            GetPrivateProfileString("Count", "count","null", temp, 255, "./setting.ini");
+            tmp = Int32.Parse(temp.ToString());
+            buttonCount = (byte)tmp;
+            for(var i = 0; i < buttonCount; i++)
+            {
+                GetPrivateProfileString("KEY", "key" + (i+1) , "null", temp, 255, "./setting.ini");
+                tmp = Int32.Parse(temp.ToString());
+                btns[i].KeySetup(tmp);
+            }
+            for (var i = 0; i < buttonCount; i++)
+            {
+                GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, "./setting.ini");
+                btns[i].LabelSetup(temp.ToString());
+            }
+            SetButtonCount(buttonCount);
+
         }
     }
 }

@@ -36,16 +36,14 @@
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsiAddButton = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiRemoveButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiReset = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yugecinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dnjstlr555ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrProcess = new System.Windows.Forms.Timer(this.components);
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlInfo.SuspendLayout();
             this.cms.SuspendLayout();
             this.SuspendLayout();
@@ -105,84 +103,76 @@
             this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsiAddButton,
             this.tsiRemoveButton,
-            this.saveKeySettingsToolStripMenuItem,
             this.tsiReset,
             this.resetToolStripMenuItem,
-            this.settingsToolStripMenuItem,
             this.toolStripSeparator1,
-            this.creditsToolStripMenuItem,
+            this.saveKeySettingsToolStripMenuItem,
+            this.loadKeySetupToolStripMenuItem,
+            this.settingsToolStripMenuItem,
             this.tsiExit});
             this.cms.Name = "cms";
             this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.cms.ShowImageMargin = false;
-            this.cms.Size = new System.Drawing.Size(133, 208);
+            this.cms.Size = new System.Drawing.Size(170, 208);
             this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
             // 
             // tsiAddButton
             // 
             this.tsiAddButton.Name = "tsiAddButton";
-            this.tsiAddButton.Size = new System.Drawing.Size(132, 22);
+            this.tsiAddButton.Size = new System.Drawing.Size(169, 22);
             this.tsiAddButton.Text = "Add button";
             this.tsiAddButton.Click += new System.EventHandler(this.tsiAddButton_Click);
             // 
             // tsiRemoveButton
             // 
             this.tsiRemoveButton.Name = "tsiRemoveButton";
-            this.tsiRemoveButton.Size = new System.Drawing.Size(132, 22);
+            this.tsiRemoveButton.Size = new System.Drawing.Size(169, 22);
             this.tsiRemoveButton.Text = "Remove button";
             this.tsiRemoveButton.Click += new System.EventHandler(this.tsiRemoveButton_Click);
-            // 
-            // saveKeySettingsToolStripMenuItem
-            // 
-            this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
-            this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
-            this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
             // 
             // tsiReset
             // 
             this.tsiReset.Name = "tsiReset";
-            this.tsiReset.Size = new System.Drawing.Size(132, 22);
+            this.tsiReset.Size = new System.Drawing.Size(169, 22);
             this.tsiReset.Text = "Reset total keys";
             this.tsiReset.Click += new System.EventHandler(this.tsiReset_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.resetToolStripMenuItem.Text = "Reset max kps";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(129, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
-            // creditsToolStripMenuItem
+            // saveKeySettingsToolStripMenuItem
             // 
-            this.creditsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.yugecinToolStripMenuItem,
-            this.dnjstlr555ToolStripMenuItem});
-            this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.creditsToolStripMenuItem.Text = "Credits";
+            this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
+            this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
+            this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
             // 
-            // yugecinToolStripMenuItem
+            // loadKeySetupToolStripMenuItem
             // 
-            this.yugecinToolStripMenuItem.Name = "yugecinToolStripMenuItem";
-            this.yugecinToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.yugecinToolStripMenuItem.Text = "yugecin";
+            this.loadKeySetupToolStripMenuItem.Name = "loadKeySetupToolStripMenuItem";
+            this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
+            this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
             // 
-            // dnjstlr555ToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.dnjstlr555ToolStripMenuItem.Name = "dnjstlr555ToolStripMenuItem";
-            this.dnjstlr555ToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.dnjstlr555ToolStripMenuItem.Text = "dnjstlr555";
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
             // 
             // tsiExit
             // 
             this.tsiExit.Name = "tsiExit";
-            this.tsiExit.Size = new System.Drawing.Size(132, 22);
+            this.tsiExit.Size = new System.Drawing.Size(169, 22);
             this.tsiExit.Text = "&Exit";
             this.tsiExit.Click += new System.EventHandler(this.tsiExit_Click);
             // 
@@ -191,12 +181,6 @@
             this.tmrProcess.Enabled = true;
             this.tmrProcess.Interval = 5;
             this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // frmMain
             // 
@@ -239,11 +223,9 @@
 		private System.Windows.Forms.Timer tmrProcess;
 		private System.Windows.Forms.ToolStripMenuItem tsiAddButton;
 		private System.Windows.Forms.ToolStripMenuItem tsiRemoveButton;
-        private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem yugecinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveKeySettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dnjstlr555ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadKeySetupToolStripMenuItem;
     }
 }
