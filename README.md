@@ -1,26 +1,26 @@
-###osukps
+### osukps
 A little program that shows keystates, keys per second and total keys for rythm games (osu!, stepmania etc).
 
-####Preview
+#### Preview
 ![preview](/preview.gif?raw=true)  
 Extra buttons can be added or removed (minimum 1, maximum 10).
 
-###Download
+### Download
 [Latest](/osukps/bin/osukps.exe?raw=true)
 
-###Usage
+### Usage
 Right click to access a menu that does stuff (add/remove buttons, exit).  
 Click a button (blue square) to assign a key to it.
 
-###Changelog
-######160528
+### Changelog
+###### 160528
 * Initial release
 
-###Todo's
+### Todo's
 * save settings
 * adjustable button colors
 * adjustable kps colors
 
-###License
+### License
 [MIT License](/LICENSE)
 
