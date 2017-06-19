@@ -1,8 +1,6 @@
 ﻿
-namespace osukps
-{
-	public interface IKeyHandler
-	{
+namespace osukps {
+	public interface IKeyHandler {
 		bool Handle();
 	}
 }
