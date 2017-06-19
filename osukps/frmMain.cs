@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace osukps
 {
 	public partial class frmMain : Form
 	{
-
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
-
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
 		private byte buttonCount;
-
 		public frmMain()
 		{
 			InitializeComponent();
@@ -40,8 +38,15 @@ namespace osukps
 			SetButtonCount( INITIAL_BUTTONS );
 		}
 
-#region dragcodez
-		private bool moveForm;
+        #region inidll
+        [DllImport("kernel32")]
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        [DllImport("kernel32")]
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        #endregion
+
+        #region dragcodez
+        private bool moveForm;
 		private Point moveOffset;
 
 		private void f_MouseDown( object sender, MouseEventArgs e )
@@ -62,7 +67,7 @@ namespace osukps
 				this.Location = new Point( this.Location.X + ( e.Location.X - moveOffset.X ), this.Location.Y + ( e.Location.Y - moveOffset.Y ) );
 			}
 		}
-#endregion
+        #endregion
 
 		private void tmrProcess_Tick( object sender, EventArgs e )
 		{
@@ -74,7 +79,7 @@ namespace osukps
 			kpsHandler.Update( keyCount );
 		}
 
-		private void SetButtonCount( byte buttonCount)
+		private void SetButtonCount( byte buttonCount )
 		{
 			this.buttonCount = Math.Max( (byte) 1, Math.Min( MAX_BUTTONS, buttonCount ) );
 			for (int i = 0; i < MAX_BUTTONS; i++)
@@ -105,5 +110,64 @@ namespace osukps
 			kpsHandler.ResetTotal();
 		}
 
-	}
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void saveKeySettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            WritePrivateProfileString("Count", "count", buttonCount.ToString(), "./setting.ini");
+
+            for (var i = 0; i < buttonCount; i++)
+            {
+                var b = btns[i].mykey();
+                WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString() , "./setting.ini");
+            }
+            for (var i = 0; i < buttonCount; i++)
+            {
+                var b = btns[i].mystring();
+                WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), "./setting.ini");
+            }
+            MessageBox.Show("Complete!");
+        }
+
+        private void pnlInfo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            kpsHandler.resetmax();
+        }
+
+        private void loadKeySetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tmp=0;
+            StringBuilder temp = new StringBuilder(255);
+            GetPrivateProfileString("Count", "count","null", temp, 255, "./setting.ini");
+            tmp = Int32.Parse(temp.ToString());
+            buttonCount = (byte)tmp;
+            for(var i = 0; i < buttonCount; i++)
+            {
+                GetPrivateProfileString("KEY", "key" + (i+1) , "null", temp, 255, "./setting.ini");
+                tmp = Int32.Parse(temp.ToString());
+                btns[i].KeySetup(tmp);
+            }
+            for (var i = 0; i < buttonCount; i++)
+            {
+                GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, "./setting.ini");
+                btns[i].LabelSetup(temp.ToString());
+            }
+            SetButtonCount(buttonCount);
+
+        }
+    }
 }
