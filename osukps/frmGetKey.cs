@@ -9,11 +9,12 @@ namespace osukps {
 
 		int first = 1;
 
-		public static IKeyHandler GetKey(IKeyHandler handler, Point p) {
+		public static IKeyHandler ShowDialogAndGetKeyHandler(Point p) {
+			instance.ActiveControl = null;
 			instance.Position = p;
 			instance.ShowDialog();
 			if (instance.Cancelled) {
-				return handler;
+				return null;
 			}
 			return new DefKeyHandler(instance.KeyCode);
 		}
@@ -78,14 +79,6 @@ namespace osukps {
 			txtKey.Text = "";
 			Cancelled = true;
 			first = 1;
-		}
-
-		private void lblKey_Click(object sender, EventArgs e) {
-
-		}
-
-		private void txtKey_TextChanged(object sender, EventArgs e) {
-
 		}
 	}
 }

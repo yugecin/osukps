@@ -56,7 +56,11 @@ namespace osukps {
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {
-			Handler = frmGetKey.GetKey(Handler, PointToScreen(new Point(Width / 2, Height / 2 - 150)));
+			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(PointToScreen(new Point(Width / 2, Height / 2 - 150)));
+			if (newHandler == null) {
+				return;
+			}
+			Handler = newHandler;
 			key = frmGetKey.yourkey(); //get my key id
 			frmGetKey.UpdateLabel(label);
 			if (settingChangedEvent != null) {
