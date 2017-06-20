@@ -23,13 +23,13 @@ namespace osukps {
 
 		private void t_Tick(object sender, System.EventArgs e) {
 			kps[index] = 0;
-			if(++index >= 10) {
+			if (++index >= 10) {
 				index = 0;
 			}
 		}
 
 		public void Update(byte keyCount) {
-			for(byte i = 0; i < 10; i++) {
+			for (byte i = 0; i < 10; i++) {
 				kps[i] += keyCount;
 			}
 			total += keyCount;
@@ -38,23 +38,20 @@ namespace osukps {
 
 		private void UpdateLabels() {
 			byte kps = this.kps[index];
-			if(kps > max) {
+			if (kps > max) {
 				max = kps;
 			}
-			if(kps >= 10) {
+			if (kps >= 10) {
 				lblKps.ForeColor = Color.FromArgb(255, 248, 0, 0);
-			}
-			else if(kps >= 5) {
+			} else if (kps >= 5) {
 				lblKps.ForeColor = Color.FromArgb(255, 0, 190, 255);
-			}
-			else {
+			} else {
 				lblKps.ForeColor = Color.White;
 			}
 
-			if(kps == 0) {
+			if (kps == 0) {
 				lblKps.Text = string.Format("{0} Max", max);
-			}
-			else lblKps.Text = string.Format("{0} Kps", kps);
+			} else lblKps.Text = string.Format("{0} Kps", kps);
 
 			lblTotal.Text = total.ToString();
 

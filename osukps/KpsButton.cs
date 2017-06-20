@@ -59,7 +59,7 @@ namespace osukps {
 			Handler = frmGetKey.GetKey(Handler, PointToScreen(new Point(Width / 2, Height / 2 - 150)));
 			key = frmGetKey.yourkey(); //get my key id
 			frmGetKey.UpdateLabel(label);
-			if(settingChangedEvent != null) {
+			if (settingChangedEvent != null) {
 				settingChangedEvent(null, null);
 			}
 		}
@@ -75,14 +75,13 @@ namespace osukps {
 
 		public byte Process() {
 			byte isJustPressed = 0;
-			if(Handler.Handle()) {
+			if (Handler.Handle()) {
 				color = 255;
-				if(!state) {
+				if (!state) {
 					state = true;
 					isJustPressed = 1;
 				}
-			}
-			else {
+			} else {
 				state = false;
 				color = Math.Max(color - 15, 0);
 			}
