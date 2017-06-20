@@ -124,31 +124,35 @@ namespace osukps {
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
 
 			for (var i = 0; i < buttonCount; i++) {
-				var b = btns[i].mykey();
-				WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString(), SETTINGS_FILE);
+				var b = btns[i];
+				WritePrivateProfileString("KEY", "key" + (i + 1), b.mykey().ToString(), SETTINGS_FILE);
+				WritePrivateProfileString("TEXT", "text" + (i + 1), b.mystring().ToString(), SETTINGS_FILE);
+				WritePrivateProfileString("COLOR", "acolor" + (i + 1), b.myactivecolor().ToString(), SETTINGS_FILE);
+				WritePrivateProfileString("COLOR", "icolor" + (i + 1), b.myinactivecolor().ToString(), SETTINGS_FILE);
 			}
 			for (var i = 0; i < buttonCount; i++) {
-				var b = btns[i].mystring();
-				WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), SETTINGS_FILE);
+			}
+			for (var i = 0; i < buttonCount; i++) {
 			}
 			settingsModified = false;
 		}
 
 		private void loadSettings() {
 			try {
-				var tmp = 0;
 				StringBuilder temp = new StringBuilder(255);
-				GetPrivateProfileString("Count", "count", "null", temp, 255, SETTINGS_FILE);
-				tmp = Int32.Parse(temp.ToString());
-				buttonCount = (byte) tmp;
+				GetPrivateProfileString("Count", "count", null, temp, 255, SETTINGS_FILE);
+				if (temp.Length > 0) buttonCount = (byte) Int32.Parse(temp.ToString());
 				for (var i = 0; i < buttonCount; i++) {
-					GetPrivateProfileString("KEY", "key" + (i + 1), "null", temp, 255, SETTINGS_FILE);
-					tmp = Int32.Parse(temp.ToString());
-					btns[i].KeySetup(tmp);
 				}
 				for (var i = 0; i < buttonCount; i++) {
-					GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, SETTINGS_FILE);
-					btns[i].LabelSetup(temp.ToString());
+					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
+					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					if (temp.Length > 0) btns[i].LabelSetup(temp.ToString());
+					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					if (temp.Length > 0) btns[i].ActiveColorSetup(Int32.Parse(temp.ToString()));
+					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					if (temp.Length > 0) btns[i].InactiveColorSetup(Int32.Parse(temp.ToString()));
 				}
 				SetButtonCount(buttonCount);
 				settingsModified = false;

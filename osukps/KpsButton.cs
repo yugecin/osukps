@@ -34,6 +34,14 @@ namespace osukps {
 			label.Text = t;
 		}
 
+		public void ActiveColorSetup(int c) {
+			color.active = Color.FromArgb(c);
+		}
+
+		public void InactiveColorSetup(int c) {
+			color.inactive = Color.FromArgb(c);
+		}
+
 		private void createPanel() {
 			Panel p = new Panel();
 			p.Visible = true;
@@ -78,6 +86,14 @@ namespace osukps {
 
 		public string mystring() {
 			return label.Text;
+		}
+
+		public int myactivecolor() {
+			return color.active.ToArgb();
+		}
+
+		public int myinactivecolor() {
+			return color.inactive.ToArgb();
 		}
 
 		public byte Process() {

@@ -94,7 +94,7 @@ namespace osukps {
 				return;
 			}
 			colors.inactive = (Color) newcol;
-			btnColActive.BackColor = colors.inactive;
+			btnColInactive.BackColor = colors.inactive;
 		}
 
 		private void btnColActive_Click(object sender, EventArgs e) {
