@@ -27,6 +27,7 @@ namespace osukps {
 		}
 
 		public void KeySetup(int k) {
+			key = k;
 			Handler = new DefKeyHandler(k);
 		}
 
@@ -67,7 +68,7 @@ namespace osukps {
 
 		private void KpsButton_Click(object sender, EventArgs e) {
 			Point pt = PointToScreen(new Point(Width / 2, Height / 2 - 150));
-			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, pt);
+			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, key, label.Text, pt);
 			if (newHandler == null) {
 				return;
 			}

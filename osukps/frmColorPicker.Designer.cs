@@ -161,6 +161,7 @@
 			this.Name = "frmColorPicker";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Color picker";
+			this.TopMost = true;
 			this.Load += new System.EventHandler(this.frmColorPicker_Load);
 			((System.ComponentModel.ISupportInitialize)(this.rnum)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gnum)).EndInit();

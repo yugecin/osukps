@@ -8,12 +8,16 @@ namespace osukps {
 		private static frmGetKey instance = new frmGetKey();
 
 		private KpsButtonColor colors;
-		int first = 1;
+		private Color oldactivecolor;
+		private Color oldinactivecolor;
+		private bool keychanged;
 
-		public static IKeyHandler ShowDialogAndGetKeyHandler(KpsButtonColor colors, Point p) {
+		public static IKeyHandler ShowDialogAndGetKeyHandler(KpsButtonColor colors, int prevkey, string prevlabel, Point p) {
 			instance.colors = colors;
 			instance.ActiveControl = null;
 			instance.Position = p;
+			instance.KeyCode = prevkey;
+			instance.txtKey.Text = prevlabel;
 			instance.ShowDialog();
 			if (instance.Cancelled) {
 				return null;
@@ -47,6 +51,8 @@ namespace osukps {
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e) {
+			colors.active = oldactivecolor;
+			colors.inactive = oldinactivecolor;
 			Close();
 		}
 
@@ -56,22 +62,23 @@ namespace osukps {
 		}
 
 		private void frmGetKey_KeyUp(object sender, KeyEventArgs e) {
-			if (first == 1) { //first keydown check
-				if (txtKey.Focused) {
-					return;
-				}
-				var tmp = "";
-				var key = 0;
-				key = (int) e.KeyCode;
-				tmp = (new KeysConverter()).ConvertToString(key);
+			if (keychanged) { //first keydown check
+				return;
+			}
+			if (txtKey.Focused) {
+				return;
+			}
+			var tmp = "";
+			var key = 0;
+			key = (int) e.KeyCode;
+			tmp = (new KeysConverter()).ConvertToString(key);
 
-				if (tmp == "ProcessKey") { } else { //valid keycode check
-					KeyCode = (int) e.KeyCode;
-					lblKey.Text = (new KeysConverter()).ConvertToString(KeyCode);
-					txtKey.Text = lblKey.Text;
-					e.Handled = true;
-					first = 0;
-				}
+			if (tmp != "ProcessKey") { //valid keycode check
+				KeyCode = (int) e.KeyCode;
+				lblKey.Text = (new KeysConverter()).ConvertToString(KeyCode);
+				txtKey.Text = lblKey.Text;
+				e.Handled = true;
+				keychanged = true;
 			}
 		}
 
@@ -80,12 +87,13 @@ namespace osukps {
 			if (Location.Y < 0) {
 				Location = new Point(Location.X, 0);
 			}
+			oldactivecolor = colors.active;
+			oldinactivecolor = colors.inactive;
 			btnColInactive.BackColor = colors.inactive;
 			btnColActive.BackColor = colors.active;
 			lblKey.Text = "[ Press a key ]";
-			txtKey.Text = "";
 			Cancelled = true;
-			first = 1;
+			keychanged = false;
 		}
 
 		private void btnColInactive_Click(object sender, EventArgs e) {

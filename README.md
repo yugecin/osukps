@@ -17,6 +17,8 @@ Click a button (blue square) to assign a key to it.
 * Initial release
 ###### 160904
 * dnjstlr555: Add maxkps, key load and save, fix bugs
+###### 170620
+* Colors are now adjustable
 
 ## Todo's
 * adjustable button colors
