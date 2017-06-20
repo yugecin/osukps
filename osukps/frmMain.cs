@@ -12,6 +12,7 @@ namespace osukps {
 		private KpsButton[] btns;
 		private byte buttonCount;
 		private bool settingsModified;
+		private const string SETTINGS_FILE = "./osukps.ini";
 		public frmMain() {
 			InitializeComponent();
 
@@ -127,36 +128,40 @@ namespace osukps {
 		}
 
 		private void saveSettings() {
-			WritePrivateProfileString("Count", "count", buttonCount.ToString(), "./setting.ini");
+			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
 
 			for (var i = 0; i < buttonCount; i++) {
 				var b = btns[i].mykey();
-				WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString(), "./setting.ini");
+				WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString(), SETTINGS_FILE);
 			}
 			for (var i = 0; i < buttonCount; i++) {
 				var b = btns[i].mystring();
-				WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), "./setting.ini");
+				WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), SETTINGS_FILE);
 			}
 			settingsModified = false;
 		}
 
 		private void loadSettings() {
-			var tmp = 0;
-			StringBuilder temp = new StringBuilder(255);
-			GetPrivateProfileString("Count", "count", "null", temp, 255, "./setting.ini");
-			tmp = Int32.Parse(temp.ToString());
-			buttonCount = (byte) tmp;
-			for (var i = 0; i < buttonCount; i++) {
-				GetPrivateProfileString("KEY", "key" + (i + 1), "null", temp, 255, "./setting.ini");
+			try {
+				var tmp = 0;
+				StringBuilder temp = new StringBuilder(255);
+				GetPrivateProfileString("Count", "count", "null", temp, 255, SETTINGS_FILE);
 				tmp = Int32.Parse(temp.ToString());
-				btns[i].KeySetup(tmp);
+				buttonCount = (byte) tmp;
+				for (var i = 0; i < buttonCount; i++) {
+					GetPrivateProfileString("KEY", "key" + (i + 1), "null", temp, 255, SETTINGS_FILE);
+					tmp = Int32.Parse(temp.ToString());
+					btns[i].KeySetup(tmp);
+				}
+				for (var i = 0; i < buttonCount; i++) {
+					GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, SETTINGS_FILE);
+					btns[i].LabelSetup(temp.ToString());
+				}
+				SetButtonCount(buttonCount);
+				settingsModified = false;
+			} catch (Exception) {
+				MessageBox.Show("Failed to load settings");
 			}
-			for (var i = 0; i < buttonCount; i++) {
-				GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, "./setting.ini");
-				btns[i].LabelSetup(temp.ToString());
-			}
-			SetButtonCount(buttonCount);
-			settingsModified = false;
 		}
 
 		private void frmMain_FormClosing(object sender, FormClosingEventArgs e) {
