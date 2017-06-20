@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefKeyHandler.cs" />
+    <Compile Include="frmColorPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColorPicker.Designer.cs">
+      <DependentUpon>frmColorPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGetKey.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,10 +98,14 @@
     <Compile Include="KpsButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="KpsButtonColor.cs" />
     <Compile Include="KpsHandler.cs" />
     <Compile Include="NoKeyHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmColorPicker.resx">
+      <DependentUpon>frmColorPicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGetKey.resx">
       <DependentUpon>frmGetKey.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,12 +8,14 @@ namespace osukps {
 
 		private Label label;
 		public IKeyHandler Handler { get; set; }
-		private int color;
+		private int colortimer;
 		private bool state;
 		private int key;
+		private KpsButtonColor color;
 		public event EventHandler settingChangedEvent;
 
 		public KpsButton(int position) {
+			color = new KpsButtonColor();
 			Visible = true;
 			AutoSize = false;
 			Size = new Size(40, 36);
@@ -56,7 +58,8 @@ namespace osukps {
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {
-			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(PointToScreen(new Point(Width / 2, Height / 2 - 150)));
+			Point pt = PointToScreen(new Point(Width / 2, Height / 2 - 150));
+			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, pt);
 			if (newHandler == null) {
 				return;
 			}
@@ -80,21 +83,25 @@ namespace osukps {
 		public byte Process() {
 			byte isJustPressed = 0;
 			if (Handler.Handle()) {
-				color = 255;
+				colortimer = 255;
 				if (!state) {
 					state = true;
 					isJustPressed = 1;
 				}
 			} else {
 				state = false;
-				color = Math.Max(color - 15, 0);
+				colortimer = Math.Max(colortimer - 15, 0);
 			}
 			UpdateColor();
 			return isJustPressed;
 		}
 
 		public void UpdateColor() {
-			label.BackColor = Color.FromArgb(255, color, color, 255);
+			float f = colortimer / 255f;
+			int r = color.inactive.R + (int) (f * (color.active.R - color.inactive.R));
+			int g = color.inactive.G + (int) (f * (color.active.G - color.inactive.G));
+			int b = color.inactive.B + (int) (f * (color.active.B - color.inactive.B));
+			label.BackColor = Color.FromArgb(255, r, g, b);
 		}
 
 	}

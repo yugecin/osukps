@@ -7,9 +7,11 @@ namespace osukps {
 
 		private static frmGetKey instance = new frmGetKey();
 
+		private KpsButtonColor colors;
 		int first = 1;
 
-		public static IKeyHandler ShowDialogAndGetKeyHandler(Point p) {
+		public static IKeyHandler ShowDialogAndGetKeyHandler(KpsButtonColor colors, Point p) {
+			instance.colors = colors;
 			instance.ActiveControl = null;
 			instance.Position = p;
 			instance.ShowDialog();
@@ -75,10 +77,33 @@ namespace osukps {
 
 		private void frmGetKey_Load(object sender, EventArgs e) {
 			Location = Point.Subtract(Position, new Size(Width / 2, Height / 2));
+			if (Location.Y < 0) {
+				Location = new Point(Location.X, 0);
+			}
+			btnColInactive.BackColor = colors.inactive;
+			btnColActive.BackColor = colors.active;
 			lblKey.Text = "[ Press a key ]";
 			txtKey.Text = "";
 			Cancelled = true;
 			first = 1;
+		}
+
+		private void btnColInactive_Click(object sender, EventArgs e) {
+			Color? newcol = frmColorPicker.ShowAndEdit(colors.inactive);
+			if (newcol == null) {
+				return;
+			}
+			colors.inactive = (Color) newcol;
+			btnColActive.BackColor = colors.inactive;
+		}
+
+		private void btnColActive_Click(object sender, EventArgs e) {
+			Color? newcol = frmColorPicker.ShowAndEdit(colors.active);
+			if (newcol == null) {
+				return;
+			}
+			colors.active = (Color) newcol;
+			btnColActive.BackColor = colors.active;
 		}
 	}
 }
