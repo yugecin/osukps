@@ -21,6 +21,9 @@ Click a button (blue square) to assign a key to it.
 ## Todo's
 * adjustable button colors
 * adjustable kps colors
+* save button's colors
+* custom fonts
+* custom skins
 
 ## License
 [MIT License](/LICENSE)
