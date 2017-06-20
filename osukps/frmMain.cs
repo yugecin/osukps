@@ -103,24 +103,17 @@ namespace osukps {
 			kpsHandler.ResetTotal();
 		}
 
-		private void frmMain_Load(object sender, EventArgs e) {
-
+		private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
+			kpsHandler.resetmax();
 		}
 
-		private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
-
+		private void resetAllToolStripMenuItem_Click(object sender, EventArgs e) {
+			tsiReset.PerformClick();
+			resetToolStripMenuItem.PerformClick();
 		}
 
 		private void saveKeySettingsToolStripMenuItem_Click(object sender, EventArgs e) {
 			saveSettings();
-		}
-
-		private void pnlInfo_Paint(object sender, PaintEventArgs e) {
-
-		}
-
-		private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
-			kpsHandler.resetmax();
 		}
 
 		private void loadKeySetupToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -174,6 +167,30 @@ namespace osukps {
 			} else if (res == DialogResult.Yes) {
 				saveSettings();
 			}
+		}
+
+		private void changeInactiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.inactive);
+			if (newcol == null) {
+				return;
+			}
+			Color nc = (Color) newcol;
+			for (var i = 0; i < buttonCount; i++) {
+				btns[i].color.inactive = nc;
+			}
+			settingsModified = true;
+		}
+
+		private void changeActiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.active);
+			if (newcol == null) {
+				return;
+			}
+			Color nc = (Color) newcol;
+			for (var i = 0; i < buttonCount; i++) {
+				btns[i].color.active = nc;
+			}
+			settingsModified = true;
 		}
 
 	}

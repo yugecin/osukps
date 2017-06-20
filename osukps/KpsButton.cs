@@ -11,7 +11,7 @@ namespace osukps {
 		private int colortimer;
 		private bool state;
 		private int key;
-		private KpsButtonColor color;
+		public KpsButtonColor color;
 		public event EventHandler settingChangedEvent;
 
 		public KpsButton(int position) {
