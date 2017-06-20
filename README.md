@@ -19,7 +19,7 @@ Click a button (blue square) to assign a key to it.
 * dnjstlr555: Add maxkps, key load and save, fix bugs
 
 ## Todo's
-* adjustable button colors
+--* adjustable button colors
 * adjustable kps colors
 * save button's colors
 * custom fonts
