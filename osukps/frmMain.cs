@@ -11,6 +11,7 @@ namespace osukps {
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
 		private byte buttonCount;
+		private bool settingsModified;
 		public frmMain() {
 			InitializeComponent();
 
@@ -26,12 +27,19 @@ namespace osukps {
 
 			kpsHandler = new KpsHandler(lblKps, lblTotal);
 			btns = new KpsButton[MAX_BUTTONS];
-			for(int i = 0; i < MAX_BUTTONS; i++) {
+			for (int i = 0; i < MAX_BUTTONS; i++) {
 				KpsButton n = new KpsButton(i);
+				n.settingChangedEvent += n_settingChangedEvent;
 				pnlKeys.Controls.Add(n);
 				btns[i] = n;
 			}
 			SetButtonCount(INITIAL_BUTTONS);
+
+			loadSettings();
+		}
+
+		private void n_settingChangedEvent(object sender, EventArgs e) {
+			settingsModified = true;
 		}
 
 		#region inidll
@@ -55,7 +63,7 @@ namespace osukps {
 		}
 
 		private void f_MouseMove(object sender, MouseEventArgs e) {
-			if(moveForm) {
+			if (moveForm) {
 				this.Location = new Point(this.Location.X + (e.Location.X - moveOffset.X), this.Location.Y + (e.Location.Y - moveOffset.Y));
 			}
 		}
@@ -63,7 +71,7 @@ namespace osukps {
 
 		private void tmrProcess_Tick(object sender, EventArgs e) {
 			byte keyCount = 0;
-			for(int i = 0; i < buttonCount; i++) {
+			for (int i = 0; i < buttonCount; i++) {
 				keyCount += btns[i].Process();
 			}
 			kpsHandler.Update(keyCount);
@@ -71,7 +79,7 @@ namespace osukps {
 
 		private void SetButtonCount(byte buttonCount) {
 			this.buttonCount = Math.Max((byte) 1, Math.Min(MAX_BUTTONS, buttonCount));
-			for(int i = 0; i < MAX_BUTTONS; i++) {
+			for (int i = 0; i < MAX_BUTTONS; i++) {
 				btns[i].Visible = (i < this.buttonCount);
 			}
 			// because autosize derps
@@ -103,18 +111,7 @@ namespace osukps {
 		}
 
 		private void saveKeySettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-
-			WritePrivateProfileString("Count", "count", buttonCount.ToString(), "./setting.ini");
-
-			for(var i = 0; i < buttonCount; i++) {
-				var b = btns[i].mykey();
-				WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString(), "./setting.ini");
-			}
-			for(var i = 0; i < buttonCount; i++) {
-				var b = btns[i].mystring();
-				WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), "./setting.ini");
-			}
-			MessageBox.Show("Complete!");
+			saveSettings();
 		}
 
 		private void pnlInfo_Paint(object sender, PaintEventArgs e) {
@@ -126,22 +123,53 @@ namespace osukps {
 		}
 
 		private void loadKeySetupToolStripMenuItem_Click(object sender, EventArgs e) {
+			loadSettings();
+		}
+
+		private void saveSettings() {
+			WritePrivateProfileString("Count", "count", buttonCount.ToString(), "./setting.ini");
+
+			for (var i = 0; i < buttonCount; i++) {
+				var b = btns[i].mykey();
+				WritePrivateProfileString("KEY", "key" + (i + 1), b.ToString(), "./setting.ini");
+			}
+			for (var i = 0; i < buttonCount; i++) {
+				var b = btns[i].mystring();
+				WritePrivateProfileString("TEXT", "text" + (i + 1), b.ToString(), "./setting.ini");
+			}
+			settingsModified = false;
+		}
+
+		private void loadSettings() {
 			var tmp = 0;
 			StringBuilder temp = new StringBuilder(255);
 			GetPrivateProfileString("Count", "count", "null", temp, 255, "./setting.ini");
 			tmp = Int32.Parse(temp.ToString());
 			buttonCount = (byte) tmp;
-			for(var i = 0; i < buttonCount; i++) {
+			for (var i = 0; i < buttonCount; i++) {
 				GetPrivateProfileString("KEY", "key" + (i + 1), "null", temp, 255, "./setting.ini");
 				tmp = Int32.Parse(temp.ToString());
 				btns[i].KeySetup(tmp);
 			}
-			for(var i = 0; i < buttonCount; i++) {
+			for (var i = 0; i < buttonCount; i++) {
 				GetPrivateProfileString("TEXT", "text" + (i + 1), "null", temp, 255, "./setting.ini");
 				btns[i].LabelSetup(temp.ToString());
 			}
 			SetButtonCount(buttonCount);
-
+			settingsModified = false;
 		}
+
+		private void frmMain_FormClosing(object sender, FormClosingEventArgs e) {
+			if (!settingsModified) {
+				return;
+			}
+			DialogResult res = MessageBox.Show("Settings changed, save now?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+			if (res == DialogResult.Cancel) {
+				e.Cancel = true;
+			} else if (res == DialogResult.Yes) {
+				saveSettings();
+			}
+		}
+
 	}
 }

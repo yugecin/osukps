@@ -11,6 +11,7 @@ namespace osukps {
 		private int color;
 		private bool state;
 		private int key;
+		public event EventHandler settingChangedEvent;
 
 		public KpsButton(int position) {
 			Visible = true;
@@ -54,12 +55,13 @@ namespace osukps {
 			Controls.Add(label);
 		}
 
-
-
 		private void KpsButton_Click(object sender, EventArgs e) {
 			Handler = frmGetKey.GetKey(Handler, PointToScreen(new Point(Width / 2, Height / 2 - 150)));
 			key = frmGetKey.yourkey(); //get my key id
 			frmGetKey.UpdateLabel(label);
+			if(settingChangedEvent != null) {
+				settingChangedEvent(null, null);
+			}
 		}
 
 		//for save key id and label text
