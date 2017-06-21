@@ -13,14 +13,17 @@ namespace osukps {
 		private int key;
 		public KpsButtonColor color;
 		public event EventHandler settingChangedEvent;
+        public bool isAddbutton = false;
+        frmMain frm;
 
-		public KpsButton(int position) {
+        public KpsButton(int position, frmMain form) {
+            this.frm = form;
 			color = new KpsButtonColor();
 			Visible = true;
 			AutoSize = false;
 			Size = new Size(40, 36);
 			Location = new Point(40 * position, 0);
-			createPanel();
+            createPanel();
 			createLabel();
 			Handler = NoKeyHandler.Get();
 			UpdateColor();
@@ -66,19 +69,26 @@ namespace osukps {
 			Controls.Add(label);
 		}
 
-		private void KpsButton_Click(object sender, EventArgs e) {
-			Point pt = PointToScreen(new Point(Width / 2, Height / 2 - 150));
-			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, key, label.Text, pt);
-			if (newHandler == null) {
-				return;
-			}
-			Handler = newHandler;
-			key = frmGetKey.yourkey(); //get my key id
-			frmGetKey.UpdateLabel(label);
-			if (settingChangedEvent != null) {
-				settingChangedEvent(null, null);
-			}
-		}
+        private void KpsButton_Click(object sender, EventArgs e) {
+            if (!isAddbutton)
+            {
+                Point pt = PointToScreen(new Point(Width / 2, Height / 2 - 150));
+                IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, key, label.Text, pt);
+                if (newHandler == null) {
+                    return;
+                }
+                Handler = newHandler;
+                key = frmGetKey.yourkey(); //get my key id
+                frmGetKey.UpdateLabel(label);
+                if (settingChangedEvent != null) {
+                    settingChangedEvent(null, null);
+                }
+            }
+            else
+            {
+                frm.addButton(label);
+            }
+        }
 
 		//for save key id and label text
 		public int mykey() {
@@ -120,6 +130,10 @@ namespace osukps {
 			int b = color.inactive.B + (int) (f * (color.active.B - color.inactive.B));
 			label.BackColor = Color.FromArgb(255, r, g, b);
 		}
+        public void UpdateLabel(bool i)
+        {
+            if (i) { label.Text = "+"; }
+        }
 
 	}
 }

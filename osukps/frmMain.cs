@@ -13,6 +13,8 @@ namespace osukps {
 		private byte buttonCount;
 		private bool settingsModified;
 		private const string SETTINGS_FILE = "./osukps.ini";
+        private bool isHideaddbutton = false;
+
 		public frmMain() {
 			InitializeComponent();
 
@@ -27,9 +29,9 @@ namespace osukps {
 			lblKps.MouseMove += f_MouseMove;
 
 			kpsHandler = new KpsHandler(lblKps, lblTotal);
-			btns = new KpsButton[MAX_BUTTONS];
-			for (int i = 0; i < MAX_BUTTONS; i++) {
-				KpsButton n = new KpsButton(i);
+			btns = new KpsButton[MAX_BUTTONS+1];
+			for (int i = 0; i < MAX_BUTTONS+1; i++) {
+				KpsButton n = new KpsButton(i,this);
 				n.settingChangedEvent += n_settingChangedEvent;
 				pnlKeys.Controls.Add(n);
 				btns[i] = n;
@@ -80,11 +82,16 @@ namespace osukps {
 
 		private void SetButtonCount(byte buttonCount) {
 			this.buttonCount = Math.Max((byte) 1, Math.Min(MAX_BUTTONS, buttonCount));
-			for (int i = 0; i < MAX_BUTTONS; i++) {
-				btns[i].Visible = (i < this.buttonCount);
-			}
-			// because autosize derps
-			Size = new Size(buttonCount * 40 + pnlInfo.Width, 36);
+			for (int i = 0; i < MAX_BUTTONS+1; i++) {
+				btns[i].Visible = (i -1+Convert.ToInt32(isHideaddbutton) < this.buttonCount);
+                if (!isHideaddbutton)
+                {
+                    btns[i].isAddbutton = (i == this.buttonCount);
+                    btns[i].UpdateLabel(i == this.buttonCount);
+                }
+            }
+            // because autosize derps
+            Size = new Size((buttonCount) * 40 + pnlInfo.Width, 36);
 		}
 
 		private void tsiExit_Click(object sender, EventArgs e) {
@@ -119,7 +126,16 @@ namespace osukps {
 		private void loadKeySetupToolStripMenuItem_Click(object sender, EventArgs e) {
 			loadSettings();
 		}
-
+        private void hideAddButtonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isHideaddbutton = isHideaddbutton == false;
+            SetButtonCount(buttonCount);
+        }
+        public void addButton(Label lbl)
+        {
+            lbl.Text = "";
+            SetButtonCount(++buttonCount);
+        }
 		private void saveSettings() {
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
 
@@ -130,11 +146,7 @@ namespace osukps {
 				WritePrivateProfileString("COLOR", "acolor" + (i + 1), b.myactivecolor().ToString(), SETTINGS_FILE);
 				WritePrivateProfileString("COLOR", "icolor" + (i + 1), b.myinactivecolor().ToString(), SETTINGS_FILE);
 			}
-			for (var i = 0; i < buttonCount; i++) {
-			}
-			for (var i = 0; i < buttonCount; i++) {
-			}
-			settingsModified = false;
+            settingsModified = false;
 		}
 
 		private void loadSettings() {
@@ -142,8 +154,6 @@ namespace osukps {
 				StringBuilder temp = new StringBuilder(255);
 				GetPrivateProfileString("Count", "count", null, temp, 255, SETTINGS_FILE);
 				if (temp.Length > 0) buttonCount = (byte) Int32.Parse(temp.ToString());
-				for (var i = 0; i < buttonCount; i++) {
-				}
 				for (var i = 0; i < buttonCount; i++) {
 					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 255, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
@@ -196,6 +206,5 @@ namespace osukps {
 			}
 			settingsModified = true;
 		}
-
-	}
+    }
 }
