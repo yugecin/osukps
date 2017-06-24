@@ -20,9 +20,5 @@ Click a button (blue square) to assign a key to it.
 ###### 170620
 * Colors are now adjustable
 
-## Todo's
-* adjustable button colors
-* adjustable kps colors
-
 ## License
 [MIT License](/LICENSE)
