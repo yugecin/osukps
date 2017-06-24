@@ -15,6 +15,7 @@ namespace osukps {
 		private const string SETTINGS_FILE = "./osukps.ini";
 		public frmMain() {
 			InitializeComponent();
+			InitializeButtonCountComponent();
 
 			pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;
@@ -37,6 +38,22 @@ namespace osukps {
 			SetButtonCount(INITIAL_BUTTONS);
 
 			loadSettings();
+		}
+
+		private void InitializeButtonCountComponent() {
+			for (int i = 1; i < MAX_BUTTONS + 1; i++) {
+				var b = new ToolStripMenuItem() {
+					Tag = i,
+					Text = i.ToString(),
+				};
+				b.Click += ButtonCount_Click;
+				b.Click += n_settingChangedEvent;
+				buttonCountToolStripMenuItem.DropDownItems.Add(b);
+			}
+		}
+
+		private void ButtonCount_Click(object sender, EventArgs e) {
+			SetButtonCount((byte) (int) (sender as ToolStripItem).Tag);
 		}
 
 		private void n_settingChangedEvent(object sender, EventArgs e) {
@@ -91,14 +108,6 @@ namespace osukps {
 			this.Close();
 		}
 
-		private void tsiAddButton_Click(object sender, EventArgs e) {
-			SetButtonCount(++buttonCount);
-		}
-
-		private void tsiRemoveButton_Click(object sender, EventArgs e) {
-			SetButtonCount(--buttonCount);
-		}
-
 		private void tsiReset_Click(object sender, EventArgs e) {
 			kpsHandler.ResetTotal();
 		}
@@ -123,7 +132,7 @@ namespace osukps {
 		private void saveSettings() {
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
 
-			for (var i = 0; i < buttonCount; i++) {
+			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
 				WritePrivateProfileString("KEY", "key" + (i + 1), b.mykey().ToString(), SETTINGS_FILE);
 				WritePrivateProfileString("TEXT", "text" + (i + 1), b.mystring().ToString(), SETTINGS_FILE);
@@ -142,9 +151,7 @@ namespace osukps {
 				StringBuilder temp = new StringBuilder(255);
 				GetPrivateProfileString("Count", "count", null, temp, 255, SETTINGS_FILE);
 				if (temp.Length > 0) buttonCount = (byte) Int32.Parse(temp.ToString());
-				for (var i = 0; i < buttonCount; i++) {
-				}
-				for (var i = 0; i < buttonCount; i++) {
+				for (var i = 0; i < MAX_BUTTONS; i++) {
 					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 255, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
 					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 255, SETTINGS_FILE);

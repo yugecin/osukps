@@ -29,9 +29,8 @@
 			this.lblTotal = new System.Windows.Forms.Label();
 			this.lblKps = new System.Windows.Forms.Label();
 			this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsiAddButton = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsiRemoveButton = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeInactiveColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.changeActiveColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsiReset = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +41,7 @@
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
-			this.changeActiveColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.buttonCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -99,8 +98,7 @@
 			// cms
 			// 
 			this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsiAddButton,
-            this.tsiRemoveButton,
+            this.buttonCountToolStripMenuItem,
             this.changeInactiveColorToolStripMenuItem,
             this.changeActiveColorToolStripMenuItem,
             this.toolStripSeparator2,
@@ -115,84 +113,77 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 280);
-			// 
-			// tsiAddButton
-			// 
-			this.tsiAddButton.Name = "tsiAddButton";
-			this.tsiAddButton.Size = new System.Drawing.Size(155, 22);
-			this.tsiAddButton.Text = "Add button";
-			this.tsiAddButton.Click += new System.EventHandler(this.tsiAddButton_Click);
-			// 
-			// tsiRemoveButton
-			// 
-			this.tsiRemoveButton.Name = "tsiRemoveButton";
-			this.tsiRemoveButton.Size = new System.Drawing.Size(155, 22);
-			this.tsiRemoveButton.Text = "Remove button";
-			this.tsiRemoveButton.Click += new System.EventHandler(this.tsiRemoveButton_Click);
+			this.cms.Size = new System.Drawing.Size(156, 302);
 			// 
 			// changeInactiveColorToolStripMenuItem
 			// 
 			this.changeInactiveColorToolStripMenuItem.Name = "changeInactiveColorToolStripMenuItem";
-			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.changeInactiveColorToolStripMenuItem.Text = "Change inactive color";
 			this.changeInactiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeInactiveColorToolStripMenuItem_Click);
+			// 
+			// changeActiveColorToolStripMenuItem
+			// 
+			this.changeActiveColorToolStripMenuItem.Name = "changeActiveColorToolStripMenuItem";
+			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+			this.changeActiveColorToolStripMenuItem.Text = "Change active color";
+			this.changeActiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeActiveColorToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
 			// 
 			// tsiReset
 			// 
 			this.tsiReset.Name = "tsiReset";
-			this.tsiReset.Size = new System.Drawing.Size(155, 22);
+			this.tsiReset.Size = new System.Drawing.Size(156, 22);
 			this.tsiReset.Text = "Reset total keys";
 			this.tsiReset.Click += new System.EventHandler(this.tsiReset_Click);
 			// 
 			// resetToolStripMenuItem
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.resetToolStripMenuItem.Text = "Reset max kps";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
 			// 
 			// resetAllToolStripMenuItem
 			// 
 			this.resetAllToolStripMenuItem.Name = "resetAllToolStripMenuItem";
-			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.resetAllToolStripMenuItem.Text = "Reset all";
 			this.resetAllToolStripMenuItem.Click += new System.EventHandler(this.resetAllToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
 			// 
 			// saveKeySettingsToolStripMenuItem
 			// 
 			this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
-			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
 			this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
 			// 
 			// loadKeySetupToolStripMenuItem
 			// 
 			this.loadKeySetupToolStripMenuItem.Name = "loadKeySetupToolStripMenuItem";
-			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
 			this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
 			// 
 			// tsiExit
 			// 
 			this.tsiExit.Name = "tsiExit";
-			this.tsiExit.Size = new System.Drawing.Size(155, 22);
+			this.tsiExit.Size = new System.Drawing.Size(156, 22);
 			this.tsiExit.Text = "&Exit";
 			this.tsiExit.Click += new System.EventHandler(this.tsiExit_Click);
 			// 
@@ -202,12 +193,11 @@
 			this.tmrProcess.Interval = 5;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
-			// changeActiveColorToolStripMenuItem
+			// buttonCountToolStripMenuItem
 			// 
-			this.changeActiveColorToolStripMenuItem.Name = "changeActiveColorToolStripMenuItem";
-			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-			this.changeActiveColorToolStripMenuItem.Text = "Change active color";
-			this.changeActiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeActiveColorToolStripMenuItem_Click);
+			this.buttonCountToolStripMenuItem.Name = "buttonCountToolStripMenuItem";
+			this.buttonCountToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.buttonCountToolStripMenuItem.Text = "Button count";
 			// 
 			// frmMain
 			// 
@@ -248,8 +238,6 @@
 		private System.Windows.Forms.ToolStripMenuItem tsiExit;
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
 		private System.Windows.Forms.Timer tmrProcess;
-		private System.Windows.Forms.ToolStripMenuItem tsiAddButton;
-		private System.Windows.Forms.ToolStripMenuItem tsiRemoveButton;
 		private System.Windows.Forms.ToolStripMenuItem saveKeySettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
@@ -258,5 +246,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem resetAllToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem changeActiveColorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem buttonCountToolStripMenuItem;
 	}
 }
