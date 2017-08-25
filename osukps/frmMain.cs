@@ -17,7 +17,10 @@ namespace osukps {
 			InitializeComponent();
 			InitializeButtonCountComponent();
 
-			pnlInfo.MouseUp += f_MouseUp;
+            FontHandler.labels.Add(lblKps);
+            FontHandler.labels.Add(lblTotal);
+
+            pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;
 			pnlInfo.MouseMove += f_MouseMove;
 			lblTotal.MouseUp += f_MouseUp;
@@ -204,5 +207,23 @@ namespace osukps {
 			settingsModified = true;
 		}
 
-	}
+        private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void changeFontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (fontDialog.ShowDialog() == DialogResult.OK)
+                {
+                    FontHandler.changeFont(fontDialog.Font);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), ex.Message);
+            }
+        }
+    }
 }

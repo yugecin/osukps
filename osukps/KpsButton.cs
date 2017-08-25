@@ -52,7 +52,7 @@ namespace osukps {
 			Controls.Add(p);
 		}
 
-		private void createLabel() {
+		public void createLabel() {
 			label = new Label();
 			label.Visible = true;
 			label.AutoSize = false;
@@ -61,9 +61,10 @@ namespace osukps {
 			label.Text = "";
 			label.TextAlign = ContentAlignment.MiddleCenter;
 			label.ForeColor = Color.White;
-			label.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            label.Font = new System.Drawing.Font(FontHandler.fontName, 9.75F, FontHandler.fontStyle, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
 			label.Click += KpsButton_Click;
-			Controls.Add(label);
+            FontHandler.labels.Add(label);
+            Controls.Add(label);
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {
