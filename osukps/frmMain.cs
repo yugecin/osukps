@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace osukps {
@@ -14,8 +16,15 @@ namespace osukps {
 		private bool settingsModified;
 		private const string SETTINGS_FILE = "./osukps.ini";
 		public frmMain() {
+			CultureInfo customCulture = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
+			customCulture.NumberFormat.NumberDecimalSeparator = ".";
+			Thread.CurrentThread.CurrentCulture = customCulture;
+
 			InitializeComponent();
 			InitializeButtonCountComponent();
+
+			FontHandler.labels.Add(lblKps);
+			FontHandler.labels.Add(lblTotal);
 
 			pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;
@@ -38,6 +47,9 @@ namespace osukps {
 			SetButtonCount(INITIAL_BUTTONS);
 
 			loadSettings();
+			if (FontHandler.currentFont == null) {
+				FontHandler.resetFont();
+			}
 		}
 
 		private void InitializeButtonCountComponent() {
@@ -131,6 +143,9 @@ namespace osukps {
 
 		private void saveSettings() {
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
+			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, SETTINGS_FILE);
+			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), SETTINGS_FILE);
+			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", SETTINGS_FILE);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
@@ -138,10 +153,6 @@ namespace osukps {
 				WritePrivateProfileString("TEXT", "text" + (i + 1), b.mystring().ToString(), SETTINGS_FILE);
 				WritePrivateProfileString("COLOR", "acolor" + (i + 1), b.myactivecolor().ToString(), SETTINGS_FILE);
 				WritePrivateProfileString("COLOR", "icolor" + (i + 1), b.myinactivecolor().ToString(), SETTINGS_FILE);
-			}
-			for (var i = 0; i < buttonCount; i++) {
-			}
-			for (var i = 0; i < buttonCount; i++) {
 			}
 			settingsModified = false;
 		}
@@ -161,6 +172,13 @@ namespace osukps {
 					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 255, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].InactiveColorSetup(Int32.Parse(temp.ToString()));
 				}
+				GetPrivateProfileString("Font", "family", "", temp, 255, SETTINGS_FILE);
+				string fontfam = temp.ToString();
+				GetPrivateProfileString("Font", "size", "", temp, 255, SETTINGS_FILE);
+				string fontsize = temp.ToString();
+				GetPrivateProfileString("Font", "bold", "", temp, 255, SETTINGS_FILE);
+				string fontbold = temp.ToString();
+				LoadFont(fontfam, fontsize, fontbold);
 				SetButtonCount(buttonCount);
 				settingsModified = false;
 			} catch (Exception) {
@@ -204,5 +222,30 @@ namespace osukps {
 			settingsModified = true;
 		}
 
+		private void changeFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				if (fontDialog.ShowDialog() == DialogResult.OK) {
+					FontHandler.changeFont(fontDialog.Font);
+					settingsModified = true;
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(ex.ToString(), ex.Message);
+			}
+		}
+
+		private void resetFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			FontHandler.resetFont();
+			settingsModified = true;
+		}
+
+		private void LoadFont(string fontfam, string fontsize, string bold) {
+			if (fontfam.Length == 0 || fontsize.Length == 0 || bold.Length == 0) {
+				return;
+			}
+			try {
+				Font f = new Font(fontfam, float.Parse(fontsize), bold == "y" ? FontStyle.Bold : FontStyle.Regular);
+				FontHandler.changeFont(f);
+			} catch (Exception) {}
+		}
 	}
 }
