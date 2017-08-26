@@ -6,19 +6,11 @@ A little program that shows keystates, keys per second and total keys for rythm 
 Extra buttons can be added or removed (minimum 1, maximum 10).
 
 ## Download
-[Latest](/osukps/bin/osukps.exe?raw=true)
+See [Releases](https://github.com/yugecin/osukps/releases)
 
 ## Usage
 Right click to access a menu that does stuff (add/remove buttons, exit).  
 Click a button (blue square) to assign a key to it.
-
-## Changelog
-###### 160528
-* Initial release
-###### 160904
-* dnjstlr555: Add maxkps, key load and save, fix bugs
-###### 170620
-* Colors are now adjustable
 
 ## License
 [MIT License](/LICENSE)

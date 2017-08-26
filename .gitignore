@@ -1,6 +1,6 @@
 
 osukps/obj/
-osukps/bin/[Dd]ebug/
+osukps/bin/
 *.suo
 *.pdb
 *.vshost.exe
