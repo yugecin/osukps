@@ -40,10 +40,11 @@
 			this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resetFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -74,7 +75,7 @@
 			// lblTotal
 			// 
 			this.lblTotal.AutoSize = true;
-			this.lblTotal.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+			this.lblTotal.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblTotal.ForeColor = System.Drawing.Color.White;
 			this.lblTotal.Location = new System.Drawing.Point(0, 18);
 			this.lblTotal.MinimumSize = new System.Drawing.Size(0, 18);
@@ -87,7 +88,7 @@
 			// lblKps
 			// 
 			this.lblKps.AutoSize = true;
-			this.lblKps.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+			this.lblKps.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblKps.ForeColor = System.Drawing.Color.White;
 			this.lblKps.Location = new System.Drawing.Point(0, 0);
 			this.lblKps.MinimumSize = new System.Drawing.Size(0, 18);
@@ -112,87 +113,95 @@
             this.loadKeySetupToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.changeFontToolStripMenuItem,
+            this.resetFontToolStripMenuItem,
             this.tsiExit});
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(168, 280);
+			this.cms.Size = new System.Drawing.Size(156, 302);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
 			this.buttonCountToolStripMenuItem.Name = "buttonCountToolStripMenuItem";
-			this.buttonCountToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.buttonCountToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.buttonCountToolStripMenuItem.Text = "Button count";
 			// 
 			// changeInactiveColorToolStripMenuItem
 			// 
 			this.changeInactiveColorToolStripMenuItem.Name = "changeInactiveColorToolStripMenuItem";
-			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.changeInactiveColorToolStripMenuItem.Text = "Change inactive color";
 			this.changeInactiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeInactiveColorToolStripMenuItem_Click);
 			// 
 			// changeActiveColorToolStripMenuItem
 			// 
 			this.changeActiveColorToolStripMenuItem.Name = "changeActiveColorToolStripMenuItem";
-			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.changeActiveColorToolStripMenuItem.Text = "Change active color";
 			this.changeActiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeActiveColorToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(164, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
 			// 
 			// tsiReset
 			// 
 			this.tsiReset.Name = "tsiReset";
-			this.tsiReset.Size = new System.Drawing.Size(167, 22);
+			this.tsiReset.Size = new System.Drawing.Size(155, 22);
 			this.tsiReset.Text = "Reset total keys";
 			this.tsiReset.Click += new System.EventHandler(this.tsiReset_Click);
 			// 
 			// resetToolStripMenuItem
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.resetToolStripMenuItem.Text = "Reset max kps";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
 			// 
 			// resetAllToolStripMenuItem
 			// 
 			this.resetAllToolStripMenuItem.Name = "resetAllToolStripMenuItem";
-			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.resetAllToolStripMenuItem.Text = "Reset all";
 			this.resetAllToolStripMenuItem.Click += new System.EventHandler(this.resetAllToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
 			// 
 			// saveKeySettingsToolStripMenuItem
 			// 
 			this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
-			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
 			this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
 			// 
 			// loadKeySetupToolStripMenuItem
 			// 
 			this.loadKeySetupToolStripMenuItem.Name = "loadKeySetupToolStripMenuItem";
-			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
 			this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
+			// 
+			// changeFontToolStripMenuItem
+			// 
+			this.changeFontToolStripMenuItem.Name = "changeFontToolStripMenuItem";
+			this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.changeFontToolStripMenuItem.Text = "Change font";
+			this.changeFontToolStripMenuItem.Click += new System.EventHandler(this.changeFontToolStripMenuItem_Click);
 			// 
 			// tsiExit
 			// 
 			this.tsiExit.Name = "tsiExit";
-			this.tsiExit.Size = new System.Drawing.Size(167, 22);
+			this.tsiExit.Size = new System.Drawing.Size(155, 22);
 			this.tsiExit.Text = "&Exit";
 			this.tsiExit.Click += new System.EventHandler(this.tsiExit_Click);
 			// 
@@ -202,12 +211,12 @@
 			this.tmrProcess.Interval = 5;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
-			// changeFontToolStripMenuItem
+			// resetFontToolStripMenuItem
 			// 
-			this.changeFontToolStripMenuItem.Name = "changeFontToolStripMenuItem";
-			this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-			this.changeFontToolStripMenuItem.Text = "Change Font";
-			this.changeFontToolStripMenuItem.Click += new System.EventHandler(this.changeFontToolStripMenuItem_Click);
+			this.resetFontToolStripMenuItem.Name = "resetFontToolStripMenuItem";
+			this.resetFontToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.resetFontToolStripMenuItem.Text = "Reset font";
+			this.resetFontToolStripMenuItem.Click += new System.EventHandler(this.resetFontToolStripMenuItem_Click);
 			// 
 			// frmMain
 			// 
@@ -259,5 +268,6 @@
 		private System.Windows.Forms.ToolStripMenuItem buttonCountToolStripMenuItem;
 		private System.Windows.Forms.FontDialog fontDialog;
 		private System.Windows.Forms.ToolStripMenuItem changeFontToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem resetFontToolStripMenuItem;
 	}
 }

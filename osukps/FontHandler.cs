@@ -6,13 +6,11 @@ using System.Windows.Forms;
 
 namespace osukps {
 	class FontHandler {
-		public static string fontName = "Tahoma";
-		public static FontStyle fontStyle = FontStyle.Bold;
+		public static Font defaultFont = new Font("Tahoma", 0.75f, FontStyle.Bold);
 
 		public static List<Label> labels = new List<Label>();
 
 		static float fontMax = 14;
-		static float fontSize = 9.75f;
 		static float fontMin = 9.75f;
 
 		public static void changeFont(Font font) {
@@ -24,6 +22,10 @@ namespace osukps {
 			foreach (Label label in labels.ToArray()) {
 				label.Font = font;
 			}
+		}
+
+		public static void resetFont() {
+			changeFont(defaultFont);
 		}
 	}
 }

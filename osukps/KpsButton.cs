@@ -61,10 +61,9 @@ namespace osukps {
 			label.Text = "";
 			label.TextAlign = ContentAlignment.MiddleCenter;
 			label.ForeColor = Color.White;
-            label.Font = new System.Drawing.Font(FontHandler.fontName, 9.75F, FontHandler.fontStyle, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
 			label.Click += KpsButton_Click;
-            FontHandler.labels.Add(label);
-            Controls.Add(label);
+			FontHandler.labels.Add(label);
+			Controls.Add(label);
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {

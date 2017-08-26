@@ -17,10 +17,10 @@ namespace osukps {
 			InitializeComponent();
 			InitializeButtonCountComponent();
 
-            FontHandler.labels.Add(lblKps);
-            FontHandler.labels.Add(lblTotal);
+			FontHandler.labels.Add(lblKps);
+			FontHandler.labels.Add(lblTotal);
 
-            pnlInfo.MouseUp += f_MouseUp;
+			pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;
 			pnlInfo.MouseMove += f_MouseMove;
 			lblTotal.MouseUp += f_MouseUp;
@@ -41,6 +41,7 @@ namespace osukps {
 			SetButtonCount(INITIAL_BUTTONS);
 
 			loadSettings();
+			FontHandler.resetFont();
 		}
 
 		private void InitializeButtonCountComponent() {
@@ -215,6 +216,10 @@ namespace osukps {
 			} catch (Exception ex) {
 				MessageBox.Show(ex.ToString(), ex.Message);
 			}
+		}
+
+		private void resetFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			FontHandler.resetFont();
 		}
 	}
 }
