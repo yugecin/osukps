@@ -1,39 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Windows.Forms;
 
-namespace osukps
-{
-    class FontHandler
-    {
-        public static string fontName = "Tahoma";
-        public static System.Drawing.FontStyle fontStyle = System.Drawing.FontStyle.Bold;
+namespace osukps {
+	class FontHandler {
+		public static string fontName = "Tahoma";
+		public static FontStyle fontStyle = FontStyle.Bold;
 
-        public static List<System.Windows.Forms.Label> labels = new List<System.Windows.Forms.Label>();
+		public static List<Label> labels = new List<Label>();
 
-        static float fontMax = 14;
-        static float fontSize = 9.75f;
-        static float fontMin = 9.75f;
+		static float fontMax = 14;
+		static float fontSize = 9.75f;
+		static float fontMin = 9.75f;
 
-        public static void changeFont(System.Drawing.Font font)
-        {
-            fontName = font.FontFamily.Name;
-            fontStyle = font.Style;
-            if(font.Size < fontMin && font.Size > fontMax)
-            {
-                fontSize = font.Size;
-            } else if(font.Size < fontMin)
-            {
-                fontSize = fontMin;
-            } else
-            {
-                fontSize = fontMax;
-            }
-            foreach(System.Windows.Forms.Label label in labels.ToArray())
-            {
-                label.Font = new System.Drawing.Font(fontName, fontSize, fontStyle);
-            }
-        }
-    }
+		public static void changeFont(Font font) {
+			if (font.Size < fontMin) {
+				font = new Font(font.Name, fontMin, font.Style);
+			} else {
+				font = new Font(font.Name, fontMax, font.Style);
+			}
+			foreach (Label label in labels.ToArray()) {
+				label.Font = font;
+			}
+		}
+	}
 }

@@ -207,23 +207,14 @@ namespace osukps {
 			settingsModified = true;
 		}
 
-        private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void changeFontToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (fontDialog.ShowDialog() == DialogResult.OK)
-                {
-                    FontHandler.changeFont(fontDialog.Font);
-                }
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), ex.Message);
-            }
-        }
-    }
+		private void changeFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				if (fontDialog.ShowDialog() == DialogResult.OK) {
+					FontHandler.changeFont(fontDialog.Font);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(ex.ToString(), ex.Message);
+			}
+		}
+	}
 }
