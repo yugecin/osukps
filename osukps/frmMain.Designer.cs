@@ -118,7 +118,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 280);
+			this.cms.Size = new System.Drawing.Size(156, 302);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -190,6 +190,7 @@
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
 			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
+			this.settingsToolStripMenuItem.Visible = false;
 			// 
 			// changeFontToolStripMenuItem
 			// 
