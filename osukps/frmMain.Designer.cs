@@ -118,7 +118,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 302);
+			this.cms.Size = new System.Drawing.Size(156, 280);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -216,7 +216,7 @@
 			// tmrProcess
 			// 
 			this.tmrProcess.Enabled = true;
-			this.tmrProcess.Interval = 1;
+			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
 			// frmMain

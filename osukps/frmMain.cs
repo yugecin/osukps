@@ -35,6 +35,9 @@ namespace osukps {
 			lblKps.MouseUp += f_MouseUp;
 			lblKps.MouseDown += f_MouseDown;
 			lblKps.MouseMove += f_MouseMove;
+			pnlKeys.MouseUp += f_MouseUp;
+			pnlKeys.MouseDown += f_MouseDown;
+			pnlKeys.MouseMove += f_MouseMove;
 
 			kpsHandler = new KpsHandler(lblKps, lblTotal);
 			btns = new KpsButton[MAX_BUTTONS];
@@ -113,7 +116,8 @@ namespace osukps {
 				btns[i].Visible = (i < this.buttonCount);
 			}
 			// because autosize derps
-			Size = new Size(buttonCount * 40 + pnlInfo.Width, 36);
+			pnlKeys.Size = new Size(buttonCount * 40, 36);
+			Size = new Size(pnlKeys.Width + pnlInfo.Width, 36);
 		}
 
 		private void tsiExit_Click(object sender, EventArgs e) {

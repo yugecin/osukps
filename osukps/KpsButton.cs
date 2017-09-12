@@ -18,9 +18,8 @@ namespace osukps {
 			color = new KpsButtonColor();
 			Visible = true;
 			AutoSize = false;
-			Size = new Size(40, 36);
+			Size = new Size(36, 36);
 			Location = new Point(40 * position, 0);
-			createPanel();
 			createLabel();
 			Handler = NoKeyHandler.Get();
 			UpdateColor();
@@ -41,15 +40,6 @@ namespace osukps {
 
 		public void InactiveColorSetup(int c) {
 			color.inactive = Color.FromArgb(c);
-		}
-
-		private void createPanel() {
-			Panel p = new Panel();
-			p.Visible = true;
-			p.AutoSize = false;
-			p.Size = new Size(4, 36);
-			p.Location = new Point(36, 0);
-			Controls.Add(p);
 		}
 
 		public void createLabel() {
