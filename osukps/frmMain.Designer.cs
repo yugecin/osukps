@@ -41,10 +41,10 @@
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resetFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.resetFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -118,7 +118,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 302);
+			this.cms.Size = new System.Drawing.Size(156, 280);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -198,6 +198,13 @@
 			this.changeFontToolStripMenuItem.Text = "Change font";
 			this.changeFontToolStripMenuItem.Click += new System.EventHandler(this.changeFontToolStripMenuItem_Click);
 			// 
+			// resetFontToolStripMenuItem
+			// 
+			this.resetFontToolStripMenuItem.Name = "resetFontToolStripMenuItem";
+			this.resetFontToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.resetFontToolStripMenuItem.Text = "Reset font";
+			this.resetFontToolStripMenuItem.Click += new System.EventHandler(this.resetFontToolStripMenuItem_Click);
+			// 
 			// tsiExit
 			// 
 			this.tsiExit.Name = "tsiExit";
@@ -208,15 +215,8 @@
 			// tmrProcess
 			// 
 			this.tmrProcess.Enabled = true;
-			this.tmrProcess.Interval = 5;
+			this.tmrProcess.Interval = 1;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
-			// 
-			// resetFontToolStripMenuItem
-			// 
-			this.resetFontToolStripMenuItem.Name = "resetFontToolStripMenuItem";
-			this.resetFontToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-			this.resetFontToolStripMenuItem.Text = "Reset font";
-			this.resetFontToolStripMenuItem.Click += new System.EventHandler(this.resetFontToolStripMenuItem_Click);
 			// 
 			// frmMain
 			// 
