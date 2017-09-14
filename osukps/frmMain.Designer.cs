@@ -45,6 +45,9 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.cmsStartStopRecording = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -109,6 +112,9 @@
             this.resetToolStripMenuItem,
             this.resetAllToolStripMenuItem,
             this.toolStripSeparator1,
+            this.cmsStartStopRecording,
+            this.cmsPlaybackRecording,
+            this.toolStripSeparator3,
             this.saveKeySettingsToolStripMenuItem,
             this.loadKeySetupToolStripMenuItem,
             this.settingsToolStripMenuItem,
@@ -118,7 +124,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 280);
+			this.cms.Size = new System.Drawing.Size(156, 352);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -219,6 +225,25 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
+			// 
+			// cmsStartStopRecording
+			// 
+			this.cmsStartStopRecording.Name = "cmsStartStopRecording";
+			this.cmsStartStopRecording.Size = new System.Drawing.Size(155, 22);
+			this.cmsStartStopRecording.Text = "Start recording";
+			this.cmsStartStopRecording.Click += new System.EventHandler(this.cmsStartStopRecording_Click);
+			// 
+			// cmdPlaybackRecording
+			// 
+			this.cmsPlaybackRecording.Name = "cmdPlaybackRecording";
+			this.cmsPlaybackRecording.Size = new System.Drawing.Size(155, 22);
+			this.cmsPlaybackRecording.Text = "Playback recording";
+			this.cmsPlaybackRecording.Click += new System.EventHandler(this.cmsPlaybackRecording_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,5 +295,8 @@
 		private System.Windows.Forms.FontDialog fontDialog;
 		private System.Windows.Forms.ToolStripMenuItem changeFontToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetFontToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem cmsStartStopRecording;
+		private System.Windows.Forms.ToolStripMenuItem cmsPlaybackRecording;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 	}
 }

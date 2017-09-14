@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -8,13 +9,16 @@ using System.Windows.Forms;
 
 namespace osukps {
 	public partial class frmMain : Form {
+
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
 		private byte buttonCount;
 		private bool settingsModified;
+		private uint recordingstate;
 		private const string SETTINGS_FILE = "./osukps.ini";
+
 		public frmMain() {
 			CultureInfo customCulture = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
 			customCulture.NumberFormat.NumberDecimalSeparator = ".";
@@ -25,6 +29,8 @@ namespace osukps {
 
 			FontHandler.labels.Add(lblKps);
 			FontHandler.labels.Add(lblTotal);
+
+			tmrProcess.Interval = TIMER_INTERVAL;
 
 			pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;
@@ -104,10 +110,14 @@ namespace osukps {
 
 		private void tmrProcess_Tick(object sender, EventArgs e) {
 			byte keyCount = 0;
+			uint eventmask = 0;
 			for (int i = 0; i < buttonCount; i++) {
-				keyCount += btns[i].Process();
+				byte state = btns[i].Process();
+				keyCount += state;
+				eventmask = (eventmask << 1) | state;
 			}
 			kpsHandler.Update(keyCount);
+			UpdateRecord(eventmask);
 		}
 
 		private void SetButtonCount(byte buttonCount) {
@@ -125,11 +135,11 @@ namespace osukps {
 		}
 
 		private void tsiReset_Click(object sender, EventArgs e) {
-			kpsHandler.ResetTotal();
+			kpsHandler.SetTotal(0);
 		}
 
 		private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
-			kpsHandler.resetmax();
+			kpsHandler.SetMax(0);
 		}
 
 		private void resetAllToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -251,5 +261,22 @@ namespace osukps {
 				FontHandler.changeFont(f);
 			} catch (Exception) {}
 		}
+
+		private void cmsStartStopRecording_Click(object sender, EventArgs e) {
+			switch (recordingstate) {
+			case RS_PLAYBACK:
+			case RS_NONE: StartRecording(); break;
+			case RS_RECORDING: StopRecording(); break;
+			}
+		}
+
+		private void cmsPlaybackRecording_Click(object sender, EventArgs e) {
+			switch (recordingstate) {
+			case RS_NONE:
+			case RS_RECORDING: StartPlayback(); break;
+			case RS_PLAYBACK: StopPlayback(); break;
+			}
+		}
+
 	}
 }

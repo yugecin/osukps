@@ -8,8 +8,8 @@ namespace osukps {
 		private Label lblTotal;
 		private byte index;
 		private byte[] kps;
-		private int total;
-		private int max = 0;
+		public int total { get; private set; }
+		public int max { get; private set; }
 
 		public KpsHandler(Label lblKps, Label lblTotal) {
 			this.lblKps = lblKps;
@@ -58,13 +58,13 @@ namespace osukps {
 			//frmMain.kpsmax(kps);
 		}
 
-		public void ResetTotal() {
-			total = 0;
+		public void SetTotal(int total) {
+			this.total = total;
 			UpdateLabels();
 		}
 
-		public void resetmax() {
-			max = 0;
+		public void SetMax(int max) {
+			this.max = max;
 			UpdateLabels();
 		}
 

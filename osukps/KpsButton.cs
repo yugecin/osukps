@@ -7,7 +7,7 @@ namespace osukps {
 	public class KpsButton : Panel {
 
 		private Label label;
-		public IKeyHandler Handler { get; set; }
+		public IKeyHandler keyhandler;
 		private int colortimer;
 		private bool state;
 		private int key;
@@ -21,13 +21,13 @@ namespace osukps {
 			Size = new Size(36, 36);
 			Location = new Point(40 * position, 0);
 			createLabel();
-			Handler = NoKeyHandler.Get();
+			keyhandler = NoKeyHandler.Get();
 			UpdateColor();
 		}
 
 		public void KeySetup(int k) {
 			key = k;
-			Handler = new DefKeyHandler(k);
+			keyhandler = new DefKeyHandler(k);
 		}
 
 		public void LabelSetup(string t) {
@@ -62,7 +62,7 @@ namespace osukps {
 			if (newHandler == null) {
 				return;
 			}
-			Handler = newHandler;
+			keyhandler = newHandler;
 			key = frmGetKey.yourkey(); //get my key id
 			frmGetKey.UpdateLabel(label);
 			if (settingChangedEvent != null) {
@@ -89,7 +89,7 @@ namespace osukps {
 
 		public byte Process() {
 			byte isJustPressed = 0;
-			if (Handler.Handle()) {
+			if (keyhandler.Handle()) {
 				colortimer = 255;
 				if (!state) {
 					state = true;
