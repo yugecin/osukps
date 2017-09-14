@@ -11,10 +11,9 @@ namespace osukps {
 		private const uint RS_RECORDING = 1;
 		private const uint RS_PLAYBACK = 2;
 		private const int TIMER_INTERVAL = 2;
-		private const int REC_TIMESTEP_BITS = 31 - MAX_BUTTONS;
+		private const int REC_TIMESTEP_BITS = 32 - MAX_BUTTONS;
 		private const uint TIMEMASK = 0xffffffff >> MAX_BUTTONS;
 		private const uint EVENTMASK = ~TIMEMASK;
-		private const uint REC_MAX_DTIMESTEPS = 0xffffffff >> MAX_BUTTONS;
 		private static readonly RecordingData recordingstart = new RecordingData();
 		private static RecordingData crs = recordingstart;
 		private KPSDATA infobeforerecord;
