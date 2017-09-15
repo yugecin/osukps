@@ -8,8 +8,8 @@ namespace osukps {
 			return instance;
 		}
 
-		public bool Handle() {
-			return false;
+		public byte Handle() {
+			return 0;
 		}
 
 	}

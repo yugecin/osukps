@@ -87,8 +87,8 @@ namespace osukps {
 		}
 
 		public byte Process() {
-			byte result = 0;
-			if (keyhandler.Handle()) {
+			byte result = keyhandler.Handle();
+			if (result == 1) {
 				colortimer = 255;
 				result = 1;
 			} else {

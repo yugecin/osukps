@@ -151,8 +151,11 @@ namespace osukps {
 			public PlaybackKeyHandler(uint keymask) {
 				this.keymask = keymask;
 			}
-			public bool Handle() {
-				return (crs.data[crs.idx] & keymask) > 0;
+			public byte Handle() {
+				if ((crs.data[crs.idx] & keymask) > 0)  {
+					return 1;
+				}
+				return 0;
 			}
 		}
 

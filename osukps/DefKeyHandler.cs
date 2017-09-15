@@ -12,8 +12,8 @@ namespace osukps {
 			this.keyCode = keyCode;
 		}
 
-		public bool Handle() {
-			return (GetAsyncKeyState(keyCode) & 0x8000) != 0;
+		public byte Handle() {
+			return (byte) ((GetAsyncKeyState(keyCode) & 0x8000) >> 15);
 		}
 
 	}
