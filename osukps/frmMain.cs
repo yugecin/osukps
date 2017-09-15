@@ -116,6 +116,7 @@ namespace osukps {
 				keyCount += state;
 				eventmask = (eventmask << 1) | state;
 			}
+			eventmask <<= (MAX_BUTTONS - buttonCount);
 			kpsHandler.Update(keyCount);
 			UpdateRecord(eventmask);
 		}
