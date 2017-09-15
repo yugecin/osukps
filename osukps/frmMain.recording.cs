@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,18 +12,15 @@ namespace osukps {
 		private const uint RS_RECORDING = 1;
 		private const uint RS_PLAYBACK = 2;
 		private const int TIMER_INTERVAL = 2;
-		private const int REC_TIMESTEP_BITS = 32 - MAX_BUTTONS;
-		private const uint TIMEMASK = 0xffffffff >> MAX_BUTTONS;
-		private const uint EVENTMASK = ~TIMEMASK;
 		private static readonly RecordingData recordingstart = new RecordingData();
 		private static RecordingData crs = recordingstart;
 		private KPSDATA infobeforerecord;
 		private KPSDATA infoafterrecord;
 		private IKeyHandler[] savedkeyhandlers = new IKeyHandler[MAX_BUTTONS];
-		private uint currentsegmenttime;
+		private Stopwatch timer = new Stopwatch();
 		class RecordingData {
-			public uint[] data = new uint[1022];
-			public int idx = 1;
+			public uint mask;
+			public long endtime;
 			public RecordingData next;
 		}
 		struct KPSDATA {
@@ -31,22 +29,13 @@ namespace osukps {
 		}
 
 		private void UpdatePlayback() {
-			currentsegmenttime++;
-			if (currentsegmenttime < (crs.data[crs.idx] & TIMEMASK)) {
-				return;
-			}
-			currentsegmenttime = 0;
-			crs.idx++;
-			if (crs.idx < crs.data.Length) {
-				if (crs.data[crs.idx] == 0) {
+			if (timer.ElapsedMilliseconds >= crs.endtime) {
+				crs = crs.next;
+				if (crs == null) {
 					StopPlayback();
+					crs = recordingstart;
+					return;
 				}
-				return;
-			}
-			crs = crs.next;
-			crs.idx = 0;
-			if (crs == null) {
-				StopPlayback();
 			}
 		}
 
@@ -57,40 +46,13 @@ namespace osukps {
 			default: return;
 			}
 
-			eventmask <<= REC_TIMESTEP_BITS;
-			EnsureRecordingCapacity(copyevent: true);
-			if ((crs.data[crs.idx-1] & EVENTMASK) == eventmask) {
-				crs.data[crs.idx-1]++;
+			if (crs.mask == eventmask) {
 				return;
 			}
-			crs.idx++;
-			if (crs.idx > crs.data.Length) {
-				crs.next = new RecordingData();
-				crs.idx = 1;
-				crs = crs.next;
-			}
-			EnsureRecordingCapacity(copyevent: false);
-			crs.data[crs.idx-1] = eventmask + 1;
-		}
-
-		private void EnsureRecordingCapacity(bool copyevent) {
-			uint t = crs.data[crs.idx-1];
-			if ((t & TIMEMASK) != TIMEMASK) {
-				return;
-			}
-			if (crs.idx < crs.data.Length) {
-				crs.idx++;
-				if (copyevent) {
-					crs.data[crs.idx-1] = t & EVENTMASK;
-				}
-				return;
-			}
-			crs.idx = 1;
+			crs.endtime = timer.ElapsedMilliseconds;
 			crs.next = new RecordingData();
 			crs = crs.next;
-			if (copyevent) {
-				crs.data[0] = t & EVENTMASK;
-			}
+			crs.mask = eventmask;
 		}
 
 		private void StartRecording() {
@@ -103,9 +65,8 @@ namespace osukps {
 			cmsStartStopRecording.Text = "Stop recording";
 			crs = recordingstart;
 			crs.next = null;
-			crs.idx = 1;
-			Array.Clear(crs.data, 0, crs.data.Length);
-			crs.data[0] = 1;
+			timer.Reset();
+			timer.Start();
 			pnlInfo.BackColor = pnlKeys.BackColor = Color.Maroon;
 		}
 
@@ -113,6 +74,8 @@ namespace osukps {
 			recordingstate = RS_NONE;
 			cmsStartStopRecording.Text = "Start recording";
 			pnlInfo.BackColor = pnlKeys.BackColor = Color.Black;
+			crs.endtime = timer.ElapsedMilliseconds;
+			timer.Reset();
 		}
 
 		private void StartPlayback() {
@@ -123,15 +86,15 @@ namespace osukps {
 			infoafterrecord.max = kpsHandler.max;
 			kpsHandler.SetMax(infobeforerecord.max);
 			kpsHandler.SetTotal(infobeforerecord.total);
-			uint keymask = 0x80000000;
-			for (int i = 0; i < MAX_BUTTONS; i++) {
-				savedkeyhandlers[i] = btns[i].keyhandler;
+			uint keymask = 1;
+			for (int i = MAX_BUTTONS; i > 0;) {
+				savedkeyhandlers[--i] = btns[i].keyhandler;
 				btns[i].keyhandler = new PlaybackKeyHandler(keymask);
-				keymask >>= 1;
+				keymask <<= 1;
 			}
-			currentsegmenttime = 0;
 			crs = recordingstart;
-			crs.idx = 0;
+			timer.Reset();
+			timer.Start();
 			recordingstate = RS_PLAYBACK;
 			cmsPlaybackRecording.Text = "Stop playbacking";
 		}
@@ -144,6 +107,7 @@ namespace osukps {
 			}
 			recordingstate = RS_NONE;
 			cmsPlaybackRecording.Text = "Playback recording";
+			timer.Reset();
 		}
 
 		private class PlaybackKeyHandler : IKeyHandler {
@@ -152,7 +116,7 @@ namespace osukps {
 				this.keymask = keymask;
 			}
 			public byte Handle() {
-				if ((crs.data[crs.idx] & keymask) > 0)  {
+				if ((crs.mask & keymask) > 0)  {
 					return 1;
 				}
 				return 0;
