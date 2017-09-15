@@ -9,7 +9,6 @@ namespace osukps {
 		private Label label;
 		public IKeyHandler keyhandler;
 		private int colortimer;
-		private bool state;
 		private int key;
 		public KpsButtonColor color;
 		public event EventHandler settingChangedEvent;
@@ -88,19 +87,15 @@ namespace osukps {
 		}
 
 		public byte Process() {
-			byte isJustPressed = 0;
+			byte result = 0;
 			if (keyhandler.Handle()) {
 				colortimer = 255;
-				if (!state) {
-					state = true;
-					isJustPressed = 1;
-				}
+				result = 1;
 			} else {
-				state = false;
 				colortimer = Math.Max(colortimer - 15, 0);
 			}
 			UpdateColor();
-			return isJustPressed;
+			return result;
 		}
 
 		public void UpdateColor() {

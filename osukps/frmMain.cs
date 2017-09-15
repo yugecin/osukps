@@ -108,12 +108,18 @@ namespace osukps {
 		}
 		#endregion
 
+		private int previousbuttonstate = 0;
 		private void tmrProcess_Tick(object sender, EventArgs e) {
 			byte keyCount = 0;
 			uint eventmask = 0;
 			for (int i = 0; i < buttonCount; i++) {
 				byte state = btns[i].Process();
-				keyCount += state;
+				if (state == 1 && ((previousbuttonstate >> i) & 1) == 0) {
+					previousbuttonstate |= 1 << i;
+					keyCount += state;
+				} else if (state == 0) {
+					previousbuttonstate &= ~(1 << i);
+				}
 				eventmask = (eventmask << 1) | state;
 			}
 			eventmask <<= (MAX_BUTTONS - buttonCount);
