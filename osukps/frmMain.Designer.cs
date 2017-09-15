@@ -37,6 +37,9 @@
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.cmsStartStopRecording = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,9 +48,6 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.cmsStartStopRecording = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -124,7 +124,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 352);
+			this.cms.Size = new System.Drawing.Size(156, 330);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -177,6 +177,25 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
 			// 
+			// cmsStartStopRecording
+			// 
+			this.cmsStartStopRecording.Name = "cmsStartStopRecording";
+			this.cmsStartStopRecording.Size = new System.Drawing.Size(155, 22);
+			this.cmsStartStopRecording.Text = "Start recording";
+			this.cmsStartStopRecording.Click += new System.EventHandler(this.cmsStartStopRecording_Click);
+			// 
+			// cmsPlaybackRecording
+			// 
+			this.cmsPlaybackRecording.Name = "cmsPlaybackRecording";
+			this.cmsPlaybackRecording.Size = new System.Drawing.Size(155, 22);
+			this.cmsPlaybackRecording.Text = "Playback recording";
+			this.cmsPlaybackRecording.Click += new System.EventHandler(this.cmsPlaybackRecording_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
+			// 
 			// saveKeySettingsToolStripMenuItem
 			// 
 			this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
@@ -225,25 +244,6 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
-			// 
-			// cmsStartStopRecording
-			// 
-			this.cmsStartStopRecording.Name = "cmsStartStopRecording";
-			this.cmsStartStopRecording.Size = new System.Drawing.Size(155, 22);
-			this.cmsStartStopRecording.Text = "Start recording";
-			this.cmsStartStopRecording.Click += new System.EventHandler(this.cmsStartStopRecording_Click);
-			// 
-			// cmdPlaybackRecording
-			// 
-			this.cmsPlaybackRecording.Name = "cmdPlaybackRecording";
-			this.cmsPlaybackRecording.Size = new System.Drawing.Size(155, 22);
-			this.cmsPlaybackRecording.Text = "Playback recording";
-			this.cmsPlaybackRecording.Click += new System.EventHandler(this.cmsPlaybackRecording_Click);
-			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,7 +261,7 @@
 			this.Name = "frmMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "frmMain";
+			this.Text = "osukps";
 			this.TopMost = true;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
 			this.pnlInfo.ResumeLayout(false);

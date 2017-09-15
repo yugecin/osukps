@@ -138,7 +138,7 @@
 			this.KeyPreview = true;
 			this.MinimumSize = new System.Drawing.Size(362, 184);
 			this.Name = "frmGetKey";
-			this.Text = "Set key";
+			this.Text = "osukps - key config";
 			this.Load += new System.EventHandler(this.frmGetKey_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmGetKey_KeyUp);
 			this.ResumeLayout(false);

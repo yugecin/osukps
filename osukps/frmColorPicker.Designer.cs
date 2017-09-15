@@ -160,7 +160,7 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "frmColorPicker";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Color picker";
+			this.Text = "osukps - colorpicker";
 			this.TopMost = true;
 			this.Load += new System.EventHandler(this.frmColorPicker_Load);
 			((System.ComponentModel.ISupportInitialize)(this.rnum)).EndInit();
