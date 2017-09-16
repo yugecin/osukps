@@ -37,6 +37,8 @@
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.startStopRecHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.disabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmsStartStopRecording = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -112,6 +114,7 @@
             this.resetToolStripMenuItem,
             this.resetAllToolStripMenuItem,
             this.toolStripSeparator1,
+            this.startStopRecHotkeyToolStripMenuItem,
             this.cmsStartStopRecording,
             this.cmsPlaybackRecording,
             this.toolStripSeparator3,
@@ -124,7 +127,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 330);
+			this.cms.Size = new System.Drawing.Size(156, 374);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -176,6 +179,24 @@
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(152, 6);
+			// 
+			// startStopRecHotkeyToolStripMenuItem
+			// 
+			this.startStopRecHotkeyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disabledToolStripMenuItem});
+			this.startStopRecHotkeyToolStripMenuItem.Name = "startStopRecHotkeyToolStripMenuItem";
+			this.startStopRecHotkeyToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.startStopRecHotkeyToolStripMenuItem.Text = "Start/Stop rec hotkey";
+			// 
+			// disabledToolStripMenuItem
+			// 
+			this.disabledToolStripMenuItem.Checked = true;
+			this.disabledToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
+			this.disabledToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.disabledToolStripMenuItem.Tag = 0;
+			this.disabledToolStripMenuItem.Text = "disabled";
+			this.disabledToolStripMenuItem.Click += new System.EventHandler(this.SSRHotkey_Click);
 			// 
 			// cmsStartStopRecording
 			// 
@@ -298,5 +319,7 @@
 		private System.Windows.Forms.ToolStripMenuItem cmsStartStopRecording;
 		private System.Windows.Forms.ToolStripMenuItem cmsPlaybackRecording;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem startStopRecHotkeyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem disabledToolStripMenuItem;
 	}
 }

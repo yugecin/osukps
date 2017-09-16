@@ -17,6 +17,7 @@ namespace osukps {
 		private byte buttonCount;
 		private bool settingsModified;
 		private uint recordingstate;
+		private int reckey;
 		private const string SETTINGS_FILE = "./osukps.ini";
 
 		public frmMain() {
@@ -26,6 +27,7 @@ namespace osukps {
 
 			InitializeComponent();
 			InitializeButtonCountComponent();
+			InitializeStartStopRecHotkeyComponent();
 
 			FontHandler.labels.Add(lblKps);
 			FontHandler.labels.Add(lblTotal);
@@ -73,8 +75,43 @@ namespace osukps {
 			}
 		}
 
+		private void InitializeStartStopRecHotkeyComponent() {
+			for (int i = 0; i < 12;) {
+				var b = new ToolStripMenuItem() {
+					Tag = 0x70 + i,
+					Text = "F" + (++i).ToString(),
+				};
+				b.Click += SSRHotkey_Click;
+				b.Click += n_settingChangedEvent;
+				startStopRecHotkeyToolStripMenuItem.DropDownItems.Add(b);
+			}
+		}
+
 		private void ButtonCount_Click(object sender, EventArgs e) {
 			SetButtonCount((byte) (int) (sender as ToolStripItem).Tag);
+		}
+
+		private void SSRHotkey_Click(object sender, EventArgs e) {
+			if (!(sender is ToolStripMenuItem)) {
+				return;
+			}
+			int nk = (int) ((ToolStripMenuItem) sender).Tag;
+			if (nk == reckey) {
+				return;
+			}
+			reckey = nk;
+			UpdateSSRHotkeyActiveItem();
+			settingsModified = true;
+		}
+
+		private void UpdateSSRHotkeyActiveItem() {
+			int idx = reckey;
+			if (idx > 0) {
+				idx -= 0x6F;
+			}
+			foreach (var itm in startStopRecHotkeyToolStripMenuItem.DropDownItems) {
+				((ToolStripMenuItem) itm).Checked = idx-- == 0;
+			}
 		}
 
 		private void n_settingChangedEvent(object sender, EventArgs e) {
@@ -167,6 +204,7 @@ namespace osukps {
 			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, SETTINGS_FILE);
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), SETTINGS_FILE);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", SETTINGS_FILE);
+			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), SETTINGS_FILE);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
@@ -180,24 +218,29 @@ namespace osukps {
 
 		private void loadSettings() {
 			try {
-				StringBuilder temp = new StringBuilder(255);
-				GetPrivateProfileString("Count", "count", null, temp, 255, SETTINGS_FILE);
-				if (temp.Length > 0) buttonCount = (byte) Int32.Parse(temp.ToString());
+				StringBuilder temp = new StringBuilder(32);
+				GetPrivateProfileString("Count", "count", "4", temp, 32, SETTINGS_FILE);
+				buttonCount = (byte) Int32.Parse(temp.ToString());
+				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, SETTINGS_FILE);
+				reckey = Int32.Parse(temp.ToString());
+				UpdateSSRHotkeyActiveItem();
+
 				for (var i = 0; i < MAX_BUTTONS; i++) {
-					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 32, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 32, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].LabelSetup(temp.ToString());
-					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 32, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].ActiveColorSetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 255, SETTINGS_FILE);
+					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 32, SETTINGS_FILE);
 					if (temp.Length > 0) btns[i].InactiveColorSetup(Int32.Parse(temp.ToString()));
 				}
-				GetPrivateProfileString("Font", "family", "", temp, 255, SETTINGS_FILE);
+
+				GetPrivateProfileString("Font", "family", "", temp, 32, SETTINGS_FILE);
 				string fontfam = temp.ToString();
-				GetPrivateProfileString("Font", "size", "", temp, 255, SETTINGS_FILE);
+				GetPrivateProfileString("Font", "size", "", temp, 32, SETTINGS_FILE);
 				string fontsize = temp.ToString();
-				GetPrivateProfileString("Font", "bold", "", temp, 255, SETTINGS_FILE);
+				GetPrivateProfileString("Font", "bold", "", temp, 32, SETTINGS_FILE);
 				string fontbold = temp.ToString();
 				LoadFont(fontfam, fontsize, fontbold);
 				SetButtonCount(buttonCount);

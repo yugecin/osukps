@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace osukps {
 	partial class frmMain {
+
+		[DllImport("user32.dll")]
+		public static extern short GetAsyncKeyState(int vkey);
 
 		private const uint RS_NONE = 0;
 		private const uint RS_RECORDING = 1;
@@ -39,7 +43,21 @@ namespace osukps {
 			}
 		}
 
+		private bool keystate;
 		private void UpdateRecord(uint eventmask) {
+			if (reckey != 0 && ((GetAsyncKeyState(reckey) & 0x8000) == 0x8000)) {
+				if (!keystate) {
+					keystate = true;
+					if (recordingstate == RS_RECORDING) {
+						StopRecording();
+						return;
+					}
+					StartRecording();
+				}
+			} else {
+				keystate = false;
+			}
+
 			switch (recordingstate) {
 			case RS_RECORDING: break;
 			case RS_PLAYBACK: UpdatePlayback(); return;
