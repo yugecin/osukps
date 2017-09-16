@@ -32,7 +32,7 @@ namespace osukps {
 			FontHandler.labels.Add(lblKps);
 			FontHandler.labels.Add(lblTotal);
 
-			tmrProcess.Interval = TIMER_INTERVAL;
+			tmrProcess.Interval = 1;
 
 			pnlInfo.MouseUp += f_MouseUp;
 			pnlInfo.MouseDown += f_MouseDown;

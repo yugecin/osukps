@@ -15,7 +15,6 @@ namespace osukps {
 		private const uint RS_NONE = 0;
 		private const uint RS_RECORDING = 1;
 		private const uint RS_PLAYBACK = 2;
-		private const int TIMER_INTERVAL = 2;
 		private static readonly RecordingData recordingstart = new RecordingData();
 		private static RecordingData crs = recordingstart;
 		private KPSDATA infobeforerecord;
