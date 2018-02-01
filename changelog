@@ -1,0 +1,15 @@
+v5-170916
+* Added ability to record and playback!
+* Fixed not being able to grab and drag on every black part of the program
+
+v4-170826
+* Added ability to change fonts (thanks @ItsNovaHere)
+
+v3-170620
+* Colors are now adjustable
+
+v2-160904
+* Add maxkps, saving settings, fix bugs (thanks @dnjstlr555)
+
+v1-160528
+* Initial release
