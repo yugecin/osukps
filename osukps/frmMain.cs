@@ -328,5 +328,9 @@ namespace osukps {
 			}
 		}
 
+		private void tsiAbout_Click(object sender, EventArgs e) {
+			new frmAbout().Show();
+		}
+
 	}
 }

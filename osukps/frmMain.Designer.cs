@@ -50,6 +50,8 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.tsiAbout = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -123,11 +125,13 @@
             this.settingsToolStripMenuItem,
             this.changeFontToolStripMenuItem,
             this.resetFontToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.tsiAbout,
             this.tsiExit});
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 374);
+			this.cms.Size = new System.Drawing.Size(156, 402);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
@@ -193,7 +197,7 @@
 			this.disabledToolStripMenuItem.Checked = true;
 			this.disabledToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
-			this.disabledToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.disabledToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
 			this.disabledToolStripMenuItem.Tag = 0;
 			this.disabledToolStripMenuItem.Text = "disabled";
 			this.disabledToolStripMenuItem.Click += new System.EventHandler(this.SSRHotkey_Click);
@@ -265,6 +269,18 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(152, 6);
+			// 
+			// tsiAbout
+			// 
+			this.tsiAbout.Name = "tsiAbout";
+			this.tsiAbout.Size = new System.Drawing.Size(155, 22);
+			this.tsiAbout.Text = "About";
+			this.tsiAbout.Click += new System.EventHandler(this.tsiAbout_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,5 +337,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem startStopRecHotkeyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem disabledToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripMenuItem tsiAbout;
 	}
 }
