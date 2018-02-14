@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -330,6 +331,32 @@ namespace osukps {
 
 		private void tsiAbout_Click(object sender, EventArgs e) {
 			new frmAbout().Show();
+		}
+
+		private void loadKeySetupToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
+			loadKeySetupToolStripMenuItem.DropDown.Items.Add("hi");
+		}
+
+		private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+			saveKeySettingsToolStripMenuItem.DropDownItems.Clear();
+			saveKeySettingsToolStripMenuItem.DropDownItems.Add(newConfigurationToolStripMenuItem);
+			saveKeySettingsToolStripMenuItem.DropDownItems.Add(osukpsiniToolStripMenuItem);
+
+			loadKeySetupToolStripMenuItem.DropDownItems.Clear();
+			string[] configs = Directory.GetFiles("./", "*.ini");
+			if (configs.Length == 0) {
+				loadKeySetupToolStripMenuItem.DropDownItems.Add(noConfigurationsSavedToolStripMenuItem);
+				return;
+			}
+
+			foreach (string c in configs) {
+				string name = c;
+				if (name.StartsWith("./") && name.Length > 2) {
+					name = name.Substring(2);
+				}
+				ToolStripMenuItem tsmi = new ToolStripMenuItem(name);
+				loadKeySetupToolStripMenuItem.DropDownItems.Add(tsmi);
+			}
 		}
 
 	}
