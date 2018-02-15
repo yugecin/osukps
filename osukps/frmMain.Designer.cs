@@ -43,7 +43,11 @@
 			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.currentConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,10 +56,7 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-			this.newConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.osukpsiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.noConfigurationsSavedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.noConfigurationsFoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -231,20 +232,45 @@
 			// 
 			this.saveKeySettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newConfigurationToolStripMenuItem,
-            this.osukpsiniToolStripMenuItem});
+            this.currentConfigurationToolStripMenuItem,
+            this.toolStripSeparator6});
 			this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
 			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
 			this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
 			// 
+			// newConfigurationToolStripMenuItem
+			// 
+			this.newConfigurationToolStripMenuItem.Name = "newConfigurationToolStripMenuItem";
+			this.newConfigurationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.newConfigurationToolStripMenuItem.Text = "(save as new configuration)";
+			this.newConfigurationToolStripMenuItem.Click += new System.EventHandler(this.newConfigurationToolStripMenuItem_Click);
+			// 
+			// currentConfigurationToolStripMenuItem
+			// 
+			this.currentConfigurationToolStripMenuItem.Name = "currentConfigurationToolStripMenuItem";
+			this.currentConfigurationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.currentConfigurationToolStripMenuItem.Text = "osukps.ini";
+			this.currentConfigurationToolStripMenuItem.Click += new System.EventHandler(this.currentConfigurationToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator6
+			// 
+			this.toolStripSeparator6.Name = "toolStripSeparator6";
+			this.toolStripSeparator6.Size = new System.Drawing.Size(205, 6);
+			// 
 			// loadKeySetupToolStripMenuItem
 			// 
 			this.loadKeySetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noConfigurationsSavedToolStripMenuItem});
+            this.noConfigurationsFoundToolStripMenuItem});
 			this.loadKeySetupToolStripMenuItem.Name = "loadKeySetupToolStripMenuItem";
 			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
 			this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(152, 6);
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -292,29 +318,12 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
-			// toolStripSeparator5
+			// noConfigurationsFoundToolStripMenuItem
 			// 
-			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(152, 6);
-			// 
-			// newConfigurationToolStripMenuItem
-			// 
-			this.newConfigurationToolStripMenuItem.Name = "newConfigurationToolStripMenuItem";
-			this.newConfigurationToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-			this.newConfigurationToolStripMenuItem.Text = "(save as new configuration)";
-			// 
-			// osukpsiniToolStripMenuItem
-			// 
-			this.osukpsiniToolStripMenuItem.Name = "osukpsiniToolStripMenuItem";
-			this.osukpsiniToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-			this.osukpsiniToolStripMenuItem.Text = "osukps.ini";
-			// 
-			// noConfigurationsSavedToolStripMenuItem
-			// 
-			this.noConfigurationsSavedToolStripMenuItem.Enabled = false;
-			this.noConfigurationsSavedToolStripMenuItem.Name = "noConfigurationsSavedToolStripMenuItem";
-			this.noConfigurationsSavedToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-			this.noConfigurationsSavedToolStripMenuItem.Text = "(no configurations saved)";
+			this.noConfigurationsFoundToolStripMenuItem.Enabled = false;
+			this.noConfigurationsFoundToolStripMenuItem.Name = "noConfigurationsFoundToolStripMenuItem";
+			this.noConfigurationsFoundToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+			this.noConfigurationsFoundToolStripMenuItem.Text = "(no configurations found)";
 			// 
 			// frmMain
 			// 
@@ -376,7 +385,8 @@
 		private System.Windows.Forms.ToolStripMenuItem tsiAbout;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripMenuItem newConfigurationToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem osukpsiniToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem noConfigurationsSavedToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem currentConfigurationToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+		private System.Windows.Forms.ToolStripMenuItem noConfigurationsFoundToolStripMenuItem;
 	}
 }

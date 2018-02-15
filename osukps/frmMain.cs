@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -19,7 +20,7 @@ namespace osukps {
 		private bool settingsModified;
 		private uint recordingstate;
 		private int reckey;
-		private const string SETTINGS_FILE = "./osukps.ini";
+		private string settingsFile = "osukps.ini";
 
 		public frmMain() {
 			CultureInfo customCulture = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
@@ -201,47 +202,50 @@ namespace osukps {
 		}
 
 		private void saveSettings() {
-			WritePrivateProfileString("Count", "count", buttonCount.ToString(), SETTINGS_FILE);
-			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, SETTINGS_FILE);
-			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), SETTINGS_FILE);
-			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", SETTINGS_FILE);
-			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), SETTINGS_FILE);
+			string settingsFile = "./" + this.settingsFile;
+
+			WritePrivateProfileString("Count", "count", buttonCount.ToString(), settingsFile);
+			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, settingsFile);
+			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
+			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
+			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
-				WritePrivateProfileString("KEY", "key" + (i + 1), b.mykey().ToString(), SETTINGS_FILE);
-				WritePrivateProfileString("TEXT", "text" + (i + 1), b.mystring().ToString(), SETTINGS_FILE);
-				WritePrivateProfileString("COLOR", "acolor" + (i + 1), b.myactivecolor().ToString(), SETTINGS_FILE);
-				WritePrivateProfileString("COLOR", "icolor" + (i + 1), b.myinactivecolor().ToString(), SETTINGS_FILE);
+				WritePrivateProfileString("KEY", "key" + (i + 1), b.mykey().ToString(), settingsFile);
+				WritePrivateProfileString("TEXT", "text" + (i + 1), b.mystring().ToString(), settingsFile);
+				WritePrivateProfileString("COLOR", "acolor" + (i + 1), b.myactivecolor().ToString(), settingsFile);
+				WritePrivateProfileString("COLOR", "icolor" + (i + 1), b.myinactivecolor().ToString(), settingsFile);
 			}
 			settingsModified = false;
 		}
 
 		private void loadSettings() {
+			string settingsFile = "./" + this.settingsFile;
 			try {
 				StringBuilder temp = new StringBuilder(32);
-				GetPrivateProfileString("Count", "count", "4", temp, 32, SETTINGS_FILE);
+				GetPrivateProfileString("Count", "count", "4", temp, 32, settingsFile);
 				buttonCount = (byte) Int32.Parse(temp.ToString());
-				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, SETTINGS_FILE);
+				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
 				UpdateSSRHotkeyActiveItem();
 
 				for (var i = 0; i < MAX_BUTTONS; i++) {
-					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 32, SETTINGS_FILE);
+					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 32, SETTINGS_FILE);
+					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].LabelSetup(temp.ToString());
-					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 32, SETTINGS_FILE);
+					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].ActiveColorSetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 32, SETTINGS_FILE);
+					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].InactiveColorSetup(Int32.Parse(temp.ToString()));
 				}
 
-				GetPrivateProfileString("Font", "family", "", temp, 32, SETTINGS_FILE);
+				GetPrivateProfileString("Font", "family", "", temp, 32, settingsFile);
 				string fontfam = temp.ToString();
-				GetPrivateProfileString("Font", "size", "", temp, 32, SETTINGS_FILE);
+				GetPrivateProfileString("Font", "size", "", temp, 32, settingsFile);
 				string fontsize = temp.ToString();
-				GetPrivateProfileString("Font", "bold", "", temp, 32, SETTINGS_FILE);
+				GetPrivateProfileString("Font", "bold", "", temp, 32, settingsFile);
 				string fontbold = temp.ToString();
 				LoadFont(fontfam, fontsize, fontbold);
 				SetButtonCount(buttonCount);
@@ -333,19 +337,17 @@ namespace osukps {
 			new frmAbout().Show();
 		}
 
-		private void loadKeySetupToolStripMenuItem_DropDownOpening(object sender, EventArgs e) {
-			loadKeySetupToolStripMenuItem.DropDown.Items.Add("hi");
-		}
-
-		private void cms_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+		private void cms_Opening(object sender, CancelEventArgs e) {
 			saveKeySettingsToolStripMenuItem.DropDownItems.Clear();
 			saveKeySettingsToolStripMenuItem.DropDownItems.Add(newConfigurationToolStripMenuItem);
-			saveKeySettingsToolStripMenuItem.DropDownItems.Add(osukpsiniToolStripMenuItem);
+			saveKeySettingsToolStripMenuItem.DropDownItems.Add(currentConfigurationToolStripMenuItem);
+			saveKeySettingsToolStripMenuItem.DropDownItems.Add(toolStripSeparator6);
 
 			loadKeySetupToolStripMenuItem.DropDownItems.Clear();
+
 			string[] configs = Directory.GetFiles("./", "*.ini");
 			if (configs.Length == 0) {
-				loadKeySetupToolStripMenuItem.DropDownItems.Add(noConfigurationsSavedToolStripMenuItem);
+				loadKeySetupToolStripMenuItem.DropDownItems.Add(noConfigurationsFoundToolStripMenuItem);
 				return;
 			}
 
@@ -354,9 +356,72 @@ namespace osukps {
 				if (name.StartsWith("./") && name.Length > 2) {
 					name = name.Substring(2);
 				}
-				ToolStripMenuItem tsmi = new ToolStripMenuItem(name);
+
+				ToolStripMenuItem tsmi;
+
+				tsmi = new ToolStripMenuItem(name);
+				tsmi.Click += OnLoadSettingsFileClick;
 				loadKeySetupToolStripMenuItem.DropDownItems.Add(tsmi);
+
+				if (name == settingsFile) {
+					continue;
+				}
+
+				tsmi = new ToolStripMenuItem(name);
+				tsmi.Click += OnSaveSettingsFileClick;
+				saveKeySettingsToolStripMenuItem.DropDownItems.Add(tsmi);
 			}
+		}
+
+		private void OnLoadSettingsFileClick(object sender, EventArgs e) {
+			if (settingsModified) {
+				DialogResult res = MessageBox.Show(
+					"Changed settings will be discarded when loading settings. Discard changes and continue loading settings?",
+					"",
+					MessageBoxButtons.YesNoCancel,
+					MessageBoxIcon.Question
+				);
+				if (res != DialogResult.Yes) {
+					return;
+				}
+			}
+			changeCurrentSettingsFile(((ToolStripMenuItem) sender).Text);
+			loadSettings();
+		}
+
+		private void OnSaveSettingsFileClick(object sender, EventArgs e) {
+			string filetosave = ((ToolStripMenuItem) sender).Text;
+			if (filetosave != settingsFile) {
+				DialogResult res = MessageBox.Show(
+					"Save current configuration as " + filetosave + "?",
+					"",
+					MessageBoxButtons.YesNoCancel,
+					MessageBoxIcon.Question
+				);
+				if (res != DialogResult.Yes) {
+					return;
+				}
+				changeCurrentSettingsFile(filetosave);
+			}
+			saveSettings();
+		}
+
+		private void changeCurrentSettingsFile(string newfile) {
+			currentConfigurationToolStripMenuItem.Text = newfile;
+			settingsFile = newfile;
+		}
+
+		private void currentConfigurationToolStripMenuItem_Click(object sender, EventArgs e) {
+			saveSettings();
+		}
+
+		private void newConfigurationToolStripMenuItem_Click(object sender, EventArgs e) {
+			string name = frmPrompt.Prompt("Enter a name for your new configuration.", "", "Save");
+			if (name == null) {
+				return;
+			}
+			changeCurrentSettingsFile(name + ".ini");
+			saveSettings();
 		}
 
 	}

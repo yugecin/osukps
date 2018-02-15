@@ -98,6 +98,12 @@
     <Compile Include="frmMain.Recording.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrompt.Designer.cs">
+      <DependentUpon>frmPrompt.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrompt.resx">
+      <DependentUpon>frmPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetting.resx">
       <DependentUpon>frmSetting.cs</DependentUpon>
