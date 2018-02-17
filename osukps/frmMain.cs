@@ -12,6 +12,7 @@ using System.Windows.Forms;
 namespace osukps {
 	public partial class frmMain : Form {
 
+		public const byte MAX_KPS_COLORS = 10;
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
 		private KpsHandler kpsHandler;
@@ -22,6 +23,15 @@ namespace osukps {
 		private int reckey;
 		private string settingsFile = "osukps.ini";
 
+		public struct KPSCOLOR {
+			public int kps;
+			public Color color;
+			public bool smoothen;
+		}
+
+		public static KPSCOLOR[] kpscolors = new KPSCOLOR[MAX_KPS_COLORS];
+		public static int kpscolorscount;
+
 		public frmMain() {
 			CultureInfo customCulture = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
 			customCulture.NumberFormat.NumberDecimalSeparator = ".";
@@ -30,6 +40,15 @@ namespace osukps {
 			InitializeComponent();
 			InitializeButtonCountComponent();
 			InitializeStartStopRecHotkeyComponent();
+
+			kpscolors[0] = new KPSCOLOR();
+			kpscolors[0].kps = 5;
+			kpscolors[0].color = Color.FromArgb(255, 0, 190, 255);
+			kpscolors[0].smoothen = false;
+			kpscolors[1].kps = 10;
+			kpscolors[1].color = Color.FromArgb(255, 248, 0, 0);
+			kpscolors[1].smoothen = false;
+			kpscolorscount = 2;
 
 			FontHandler.labels.Add(lblKps);
 			FontHandler.labels.Add(lblTotal);
@@ -450,6 +469,11 @@ namespace osukps {
 			}
 			changeCurrentSettingsFile(name + ".ini");
 			saveSettings();
+		}
+
+		private void editKPSColorsToolStripMenuItem_Click(object sender, EventArgs e) {
+			frmKps k = new frmKps();
+			k.ShowDialog();
 		}
 
 	}
