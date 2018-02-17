@@ -47,6 +47,7 @@
 			this.currentConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.noConfigurationsFoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,7 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
-			this.noConfigurationsFoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.hideButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -114,6 +115,7 @@
 			// 
 			this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonCountToolStripMenuItem,
+            this.hideButtonsToolStripMenuItem,
             this.changeInactiveColorToolStripMenuItem,
             this.changeActiveColorToolStripMenuItem,
             this.toolStripSeparator2,
@@ -137,7 +139,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 408);
+			this.cms.Size = new System.Drawing.Size(156, 430);
 			this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
 			// 
 			// buttonCountToolStripMenuItem
@@ -267,6 +269,13 @@
 			this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
 			this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
 			// 
+			// noConfigurationsFoundToolStripMenuItem
+			// 
+			this.noConfigurationsFoundToolStripMenuItem.Enabled = false;
+			this.noConfigurationsFoundToolStripMenuItem.Name = "noConfigurationsFoundToolStripMenuItem";
+			this.noConfigurationsFoundToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+			this.noConfigurationsFoundToolStripMenuItem.Text = "(no configurations found)";
+			// 
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
@@ -318,12 +327,12 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
-			// noConfigurationsFoundToolStripMenuItem
+			// hideButtonsToolStripMenuItem
 			// 
-			this.noConfigurationsFoundToolStripMenuItem.Enabled = false;
-			this.noConfigurationsFoundToolStripMenuItem.Name = "noConfigurationsFoundToolStripMenuItem";
-			this.noConfigurationsFoundToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-			this.noConfigurationsFoundToolStripMenuItem.Text = "(no configurations found)";
+			this.hideButtonsToolStripMenuItem.Name = "hideButtonsToolStripMenuItem";
+			this.hideButtonsToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+			this.hideButtonsToolStripMenuItem.Text = "Hide buttons";
+			this.hideButtonsToolStripMenuItem.Click += new System.EventHandler(this.hideButtonsToolStripMenuItem_Click);
 			// 
 			// frmMain
 			// 
@@ -388,5 +397,6 @@
 		private System.Windows.Forms.ToolStripMenuItem currentConfigurationToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripMenuItem noConfigurationsFoundToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem hideButtonsToolStripMenuItem;
 	}
 }

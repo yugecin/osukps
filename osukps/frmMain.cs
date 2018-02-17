@@ -168,12 +168,33 @@ namespace osukps {
 
 		private void SetButtonCount(byte buttonCount) {
 			this.buttonCount = Math.Max((byte) 1, Math.Min(MAX_BUTTONS, buttonCount));
+			SetVisibleButtonCount(buttonCount);
+			hideButtonsToolStripMenuItem.Checked = false;
+		}
+
+		private void SetVisibleButtonCount(byte buttonCount) {
 			for (int i = 0; i < MAX_BUTTONS; i++) {
-				btns[i].Visible = (i < this.buttonCount);
+				btns[i].Visible = (i < buttonCount);
 			}
 			// because autosize derps
 			pnlKeys.Size = new Size(buttonCount * 40, 36);
 			Size = new Size(pnlKeys.Width + pnlInfo.Width, 36);
+		}
+
+		private void hideButtonsToolStripMenuItem_Click(object sender, EventArgs e) {
+			settingsModified = true;
+			UpdateHideButtonsMenuItem(hideButtonsToolStripMenuItem.Checked = !hideButtonsToolStripMenuItem.Checked);
+		}
+
+		private void UpdateHideButtonsMenuItem(bool dohide) {
+			if (dohide) {
+				hideButtonsToolStripMenuItem.Text = "Show buttons";
+				SetVisibleButtonCount(0);
+				return;
+			}
+
+			hideButtonsToolStripMenuItem.Text = "Hide buttons";
+			SetVisibleButtonCount(this.buttonCount);
 		}
 
 		private void tsiExit_Click(object sender, EventArgs e) {
@@ -205,6 +226,7 @@ namespace osukps {
 			string settingsFile = "./" + this.settingsFile;
 
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), settingsFile);
+			WritePrivateProfileString("Count", "hide", hideButtonsToolStripMenuItem.Checked.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, settingsFile);
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
@@ -222,10 +244,17 @@ namespace osukps {
 
 		private void loadSettings() {
 			string settingsFile = "./" + this.settingsFile;
+			bool tmpb;
 			try {
 				StringBuilder temp = new StringBuilder(32);
 				GetPrivateProfileString("Count", "count", "4", temp, 32, settingsFile);
 				buttonCount = (byte) Int32.Parse(temp.ToString());
+				SetButtonCount(buttonCount);
+				GetPrivateProfileString("Count", "hide", "False", temp, 32, settingsFile);
+				if (bool.TryParse(temp.ToString(), out tmpb)) {
+					hideButtonsToolStripMenuItem.Checked = tmpb;
+					UpdateHideButtonsMenuItem(tmpb);
+				}
 				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
 				UpdateSSRHotkeyActiveItem();
@@ -248,7 +277,6 @@ namespace osukps {
 				GetPrivateProfileString("Font", "bold", "", temp, 32, settingsFile);
 				string fontbold = temp.ToString();
 				LoadFont(fontfam, fontsize, fontbold);
-				SetButtonCount(buttonCount);
 				settingsModified = false;
 			} catch (Exception) {
 				MessageBox.Show("Failed to load settings");
