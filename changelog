@@ -1,3 +1,12 @@
+v6-180218
+* Support for multiple configuration files
+* Added about window with update checker
+* Ability to hide the buttons (#8)
+* Ability to specify kps colors and ranges (#6 #10)
+* Dialogs now position themselves close to the parent window
+* Colors can now be edited using a hexadecimal input format (#15)
+* Background/Foreground colors can be changed (#14)
+
 v5-170916
 * Added ability to record and playback!
 * Fixed not being able to grab and drag on every black part of the program
