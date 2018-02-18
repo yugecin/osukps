@@ -213,17 +213,17 @@ namespace osukps {
 			this.Close();
 		}
 
-		private void tsiReset_Click(object sender, EventArgs e) {
+		private void tsiResetKeys_Click(object sender, EventArgs e) {
 			kpsHandler.SetTotal(0);
 		}
 
-		private void resetToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void tsiResetMaxKPS_Click(object sender, EventArgs e) {
 			kpsHandler.SetMax(0);
 		}
 
-		private void resetAllToolStripMenuItem_Click(object sender, EventArgs e) {
-			tsiReset.PerformClick();
-			resetToolStripMenuItem.PerformClick();
+		private void tsiResetBoth_Click(object sender, EventArgs e) {
+			kpsHandler.SetTotal(0);
+			kpsHandler.SetMax(0);
 		}
 
 		private void saveKeySettingsToolStripMenuItem_Click(object sender, EventArgs e) {
