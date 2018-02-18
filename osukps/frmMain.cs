@@ -258,46 +258,48 @@ namespace osukps {
 		private void loadSettings() {
 			string settingsFile = "./" + this.settingsFile;
 			bool tmpb;
+			string section = "";
+			string key = "";
 			try {
 				StringBuilder temp = new StringBuilder(32);
-				GetPrivateProfileString("Count", "count", "4", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Count", key = "count", "4", temp, 32, settingsFile);
 				buttonCount = (byte) Int32.Parse(temp.ToString());
 				SetButtonCount(buttonCount);
-				GetPrivateProfileString("Count", "hide", "False", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Count", key = "hide", "False", temp, 32, settingsFile);
 				if (bool.TryParse(temp.ToString(), out tmpb)) {
 					hideButtonsToolStripMenuItem.Checked = tmpb;
 					UpdateHideButtonsMenuItem(tmpb);
 				}
-				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Stuff", key = "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
 				UpdateSSRHotkeyActiveItem();
-				GetPrivateProfileString("Colors", "kps", "", temp, 128, settingsFile);
+				GetPrivateProfileString(section = "Colors", key = "kps", "", temp, 128, settingsFile);
 				string kpscols = temp.ToString();
 				if (kpscols.Length > 0) {
 					LoadKpsColors(kpscols);
 				}
 
 				for (var i = 0; i < MAX_BUTTONS; i++) {
-					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 32, settingsFile);
+					GetPrivateProfileString(section = "KEY", key = "key" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].KeySetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("TEXT", "text" + (i + 1), "", temp, 32, settingsFile);
+					GetPrivateProfileString(section = "TEXT", key = "text" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].LabelSetup(temp.ToString());
-					GetPrivateProfileString("COLOR", "acolor" + (i + 1), "", temp, 32, settingsFile);
+					GetPrivateProfileString(section = "COLOR", key = "acolor" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].ActiveColorSetup(Int32.Parse(temp.ToString()));
-					GetPrivateProfileString("COLOR", "icolor" + (i + 1), "", temp, 32, settingsFile);
+					GetPrivateProfileString(section = "COLOR", key = "icolor" + (i + 1), "", temp, 32, settingsFile);
 					if (temp.Length > 0) btns[i].InactiveColorSetup(Int32.Parse(temp.ToString()));
 				}
 
-				GetPrivateProfileString("Font", "family", "", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Font", key = "family", "", temp, 32, settingsFile);
 				string fontfam = temp.ToString();
-				GetPrivateProfileString("Font", "size", "", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Font", key = "size", "", temp, 32, settingsFile);
 				string fontsize = temp.ToString();
-				GetPrivateProfileString("Font", "bold", "", temp, 32, settingsFile);
+				GetPrivateProfileString(section = "Font", key = "bold", "", temp, 32, settingsFile);
 				string fontbold = temp.ToString();
 				LoadFont(fontfam, fontsize, fontbold);
 				settingsModified = false;
 			} catch (Exception) {
-				MessageBox.Show("Failed to load settings");
+				MessageBox.Show(string.Format("Failed to load settings at section '[{0}]' key '{1}'", section, key));
 			}
 		}
 
