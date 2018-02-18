@@ -61,8 +61,11 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
+			this.pnlInfo2 = new System.Windows.Forms.Panel();
+			this.lblBpm = new System.Windows.Forms.Label();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
+			this.pnlInfo2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pnlKeys
@@ -142,7 +145,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(184, 414);
+			this.cms.Size = new System.Drawing.Size(184, 392);
 			this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
 			// 
 			// buttonCountToolStripMenuItem
@@ -359,6 +362,31 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
+			// pnlInfo2
+			// 
+			this.pnlInfo2.AutoSize = true;
+			this.pnlInfo2.BackColor = System.Drawing.Color.Black;
+			this.pnlInfo2.Controls.Add(this.lblBpm);
+			this.pnlInfo2.Dock = System.Windows.Forms.DockStyle.Left;
+			this.pnlInfo2.Location = new System.Drawing.Point(55, 0);
+			this.pnlInfo2.MinimumSize = new System.Drawing.Size(55, 36);
+			this.pnlInfo2.Name = "pnlInfo2";
+			this.pnlInfo2.Size = new System.Drawing.Size(55, 36);
+			this.pnlInfo2.TabIndex = 2;
+			// 
+			// lblBpm
+			// 
+			this.lblBpm.AutoSize = true;
+			this.lblBpm.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblBpm.ForeColor = System.Drawing.Color.White;
+			this.lblBpm.Location = new System.Drawing.Point(3, 0);
+			this.lblBpm.MinimumSize = new System.Drawing.Size(0, 18);
+			this.lblBpm.Name = "lblBpm";
+			this.lblBpm.Size = new System.Drawing.Size(47, 18);
+			this.lblBpm.TabIndex = 1;
+			this.lblBpm.Text = "0 bpm";
+			this.lblBpm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,6 +396,7 @@
 			this.BackColor = System.Drawing.Color.Magenta;
 			this.ClientSize = new System.Drawing.Size(139, 36);
 			this.ContextMenuStrip = this.cms;
+			this.Controls.Add(this.pnlInfo2);
 			this.Controls.Add(this.pnlInfo);
 			this.Controls.Add(this.pnlKeys);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -382,6 +411,8 @@
 			this.pnlInfo.ResumeLayout(false);
 			this.pnlInfo.PerformLayout();
 			this.cms.ResumeLayout(false);
+			this.pnlInfo2.ResumeLayout(false);
+			this.pnlInfo2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -426,5 +457,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 		private System.Windows.Forms.ToolStripMenuItem editKPSColorsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
+		private System.Windows.Forms.Panel pnlInfo2;
+		private System.Windows.Forms.Label lblBpm;
 	}
 }

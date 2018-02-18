@@ -15,6 +15,7 @@ namespace osukps {
 		public const byte MAX_KPS_COLORS = 30;
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
+		private BpmHandler bpmHandler;
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
 		private byte buttonCount;
@@ -60,6 +61,8 @@ namespace osukps {
 			pnlKeys.MouseUp += f_MouseUp;
 			pnlKeys.MouseDown += f_MouseDown;
 			pnlKeys.MouseMove += f_MouseMove;
+
+			bpmHandler = new BpmHandler(lblBpm);
 
 			kpsHandler = new KpsHandler(lblKps, lblTotal);
 			btns = new KpsButton[MAX_BUTTONS];
@@ -174,6 +177,9 @@ namespace osukps {
 				eventmask = (eventmask << 1) | state;
 			}
 			eventmask <<= (MAX_BUTTONS - buttonCount);
+			if (keyCount > 0) {
+				bpmHandler.OnKeypress();
+			}
 			kpsHandler.Update(keyCount);
 			UpdateRecord(eventmask);
 		}

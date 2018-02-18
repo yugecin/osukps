@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BpmHandler.cs" />
     <Compile Include="DefKeyHandler.cs" />
     <Compile Include="DialogPositioner.cs" />
     <Compile Include="FontHandler.cs" />
