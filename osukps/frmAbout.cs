@@ -32,30 +32,38 @@ namespace osukps {
 		private void DoUpdateCheck() {
 			string changelog = DownloadChangelog();
 			btnUpdate.BeginInvoke((Action) (() => {
-				if (changelog == null) {
+				try {
+					if (changelog == null) {
+						btnUpdate.Enabled = true;
+						btnUpdate.Text = "Check failed - click to retry";
+						return;
+					}
+
+					changelog = changelog.Replace("\r\n", "\n");
+
+					int latestVersion;
+					string latestTag;
+					ExtractLatestVersionAndTag(changelog, out latestVersion, out latestTag);
+
+					if (latestTag == null) {
+						btnUpdate.Enabled = true;
+						btnUpdate.Text = "Invalid response - click to retry";				
+						return;
+					}
+
+					btnUpdate.Text = "Update check finished";
+					Size = new Size(Size.Width, 292);
+					txtChangelog.Visible = true;
+					txtChangelog.Lines = StripChangelog(changelog, latestVersion - VERSION).Split('\n');
+					lblDownload.Visible = true;
+					lblDownload.Text = string.Format(lblDownload.Text, latestTag);
+				} catch (Exception e) {
+					string msg = "Something went horribly wrong: " + e.Message;
+					MessageBox.Show(msg, "osukps", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					btnUpdate.Enabled = true;
 					btnUpdate.Text = "Check failed - click to retry";
 					return;
 				}
-
-				changelog = changelog.Replace("\r\n", "\n");
-
-				int latestVersion;
-				string latestTag;
-				ExtractLatestVersionAndTag(changelog, out latestVersion, out latestTag);
-
-				if (latestTag == null) {
-					btnUpdate.Enabled = true;
-					btnUpdate.Text = "Invalid response - click to retry";				
-					return;
-				}
-
-				btnUpdate.Text = "Update check finished";
-				Size = new Size(Size.Width, 292);
-				txtChangelog.Visible = true;
-				txtChangelog.Lines = StripChangelog(changelog, latestVersion - VERSION).Split('\n');
-				lblDownload.Visible = true;
-				lblDownload.Text = string.Format(lblDownload.Text, latestTag);
 			}));
 		}
 
