@@ -469,7 +469,7 @@ namespace osukps {
 
 		private void newConfigurationToolStripMenuItem_Click(object sender, EventArgs e) {
 			DialogPositioner.From(this);
-			string name = frmPrompt.Prompt("Enter a name for your new configuration.", "", "Save");
+			string name = frmPrompt.Prompt("Save new configuration", "Enter a name for your new configuration.", "", "Save");
 			if (name == null) {
 				return;
 			}

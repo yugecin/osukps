@@ -5,8 +5,9 @@ using System.Windows.Forms;
 namespace osukps {
 	public partial class frmPrompt : Form {
 
-		public static string Prompt(string question, string placeholder, string okbuttontext) {
+		public static string Prompt(string caption, string question, string placeholder, string okbuttontext) {
 			frmPrompt f = new frmPrompt();
+			f.Text = caption;
 			f.btnOk.Text = okbuttontext;
 			f.txtInput.Text = placeholder;
 			f.lblQuestion.Text = question;
