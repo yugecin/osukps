@@ -37,8 +37,8 @@ namespace osukps {
 				location.Y + size.Height + MARGIN
 			);
 
-			south.Y = Math.Max(0, south.Y);
-			south.X = Math.Max(0, south.X);
+			south.Y = Math.Max(screen.WorkingArea.Y, south.Y);
+			south.X = Math.Max(screen.WorkingArea.X, south.X);
 
 			if (south.X + other.Size.Width > screen.WorkingArea.Width ||
 				south.Y + other.Size.Height > screen.WorkingArea.Height)
@@ -55,8 +55,8 @@ namespace osukps {
 				location.Y - other.Size.Height - MARGIN
 			);
 
-			north.Y = Math.Max(0, north.Y);
-			north.X = Math.Max(0, north.X);
+			north.Y = Math.Max(screen.WorkingArea.Y, north.Y);
+			north.X = Math.Max(screen.WorkingArea.X, north.X);
 
 			return north;
 		}
