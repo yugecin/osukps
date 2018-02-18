@@ -137,6 +137,7 @@
 			this.Name = "frmKps";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "osukps KPS editor";
+			this.Load += new System.EventHandler(this.frmKps_Load);
 			this.ResumeLayout(false);
 
 		}

@@ -12,10 +12,9 @@ namespace osukps {
 		private Color oldinactivecolor;
 		private bool keychanged;
 
-		public static IKeyHandler ShowDialogAndGetKeyHandler(KpsButtonColor colors, int prevkey, string prevlabel, Point p) {
+		public static IKeyHandler ShowDialogAndGetKeyHandler(KpsButtonColor colors, int prevkey, string prevlabel) {
 			instance.colors = colors;
 			instance.ActiveControl = null;
-			instance.Position = p;
 			instance.KeyCode = prevkey;
 			instance.txtKey.Text = prevlabel;
 			instance.ShowDialog();
@@ -40,7 +39,6 @@ namespace osukps {
 			}
 		}
 
-		public Point Position { get; set; }
 		public int KeyCode { get; set; }
 		public bool Cancelled { get; set; }
 
@@ -83,10 +81,7 @@ namespace osukps {
 		}
 
 		private void frmGetKey_Load(object sender, EventArgs e) {
-			Location = Point.Subtract(Position, new Size(Width / 2, Height / 2));
-			if (Location.Y < 0) {
-				Location = new Point(Location.X, 0);
-			}
+			DialogPositioner.ApplyTo(this);
 			oldactivecolor = colors.active;
 			oldinactivecolor = colors.inactive;
 			btnColInactive.BackColor = colors.inactive;
@@ -97,6 +92,7 @@ namespace osukps {
 		}
 
 		private void btnColInactive_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(colors.inactive);
 			if (newcol == null) {
 				return;
@@ -106,6 +102,7 @@ namespace osukps {
 		}
 
 		private void btnColActive_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(colors.active);
 			if (newcol == null) {
 				return;

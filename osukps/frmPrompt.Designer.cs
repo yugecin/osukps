@@ -88,6 +88,7 @@
 			this.Name = "frmPrompt";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "frmPrompt";
+			this.Load += new System.EventHandler(this.frmPrompt_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

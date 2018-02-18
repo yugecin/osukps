@@ -107,6 +107,7 @@
 			this.MaximizeBox = false;
 			this.Name = "frmAbout";
 			this.Text = "About osukps v{0}";
+			this.Load += new System.EventHandler(this.frmAbout_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

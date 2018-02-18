@@ -105,5 +105,9 @@ namespace osukps {
 			return nc;
 		}
 
+		private void frmKps_Load(object sender, EventArgs e) {
+			DialogPositioner.ApplyTo(this);
+		}
+
 	}
 }

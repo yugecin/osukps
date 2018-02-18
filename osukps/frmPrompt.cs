@@ -21,5 +21,9 @@ namespace osukps {
 			Close();
 		}
 
+		private void frmPrompt_Load(object sender, EventArgs e) {
+			DialogPositioner.ApplyTo(this);
+		}
+
 	}
 }

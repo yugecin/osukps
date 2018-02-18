@@ -316,6 +316,7 @@ namespace osukps {
 		}
 
 		private void changeInactiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.inactive);
 			if (newcol == null) {
 				return;
@@ -328,6 +329,7 @@ namespace osukps {
 		}
 
 		private void changeActiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.active);
 			if (newcol == null) {
 				return;
@@ -382,6 +384,8 @@ namespace osukps {
 		}
 
 		private void tsiAbout_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
+			DialogPositioner.preferSouth = true;
 			new frmAbout().Show();
 		}
 
@@ -464,6 +468,7 @@ namespace osukps {
 		}
 
 		private void newConfigurationToolStripMenuItem_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
 			string name = frmPrompt.Prompt("Enter a name for your new configuration.", "", "Save");
 			if (name == null) {
 				return;
@@ -473,6 +478,8 @@ namespace osukps {
 		}
 
 		private void editKPSColorsToolStripMenuItem_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
+			DialogPositioner.preferSouth = true;
 			frmKps k = new frmKps();
 			if (k.ShowDialog() != DialogResult.OK) {
 				return;

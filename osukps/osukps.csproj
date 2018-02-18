@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefKeyHandler.cs" />
+    <Compile Include="DialogPositioner.cs" />
     <Compile Include="FontHandler.cs" />
     <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>

@@ -27,6 +27,7 @@ namespace osukps {
 		}
 
 		private void btnColor_Click(object sender, EventArgs e) {
+			DialogPositioner.From(FindForm());
 			Color? newcol = frmColorPicker.ShowAndEdit(btnColor.BackColor);
 			if (newcol == null) {
 				return;

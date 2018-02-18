@@ -124,5 +124,9 @@ namespace osukps {
 			return Encoding.Default.GetString(response);
 		}
 
+		private void frmAbout_Load(object sender, EventArgs e) {
+			DialogPositioner.ApplyTo(this);
+		}
+
 	}
 }

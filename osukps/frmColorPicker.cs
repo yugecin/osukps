@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace osukps {
@@ -34,6 +29,7 @@ namespace osukps {
 			gscroll.Value = color.G;
 			bscroll.Value = color.B;
 			updatevalues();
+			DialogPositioner.ApplyTo(this);
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e) {

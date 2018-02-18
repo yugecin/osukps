@@ -56,8 +56,8 @@ namespace osukps {
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {
-			Point pt = PointToScreen(new Point(Width / 2, Height / 2 - 150));
-			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, key, label.Text, pt);
+			DialogPositioner.From(FindForm(), PointToScreen(new Point(Width / 2, Height / 2)));
+			IKeyHandler newHandler = frmGetKey.ShowDialogAndGetKeyHandler(color, key, label.Text);
 			if (newHandler == null) {
 				return;
 			}
