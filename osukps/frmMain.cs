@@ -12,6 +12,8 @@ using System.Windows.Forms;
 namespace osukps {
 	public partial class frmMain : Form {
 
+		public static Color FgColor = Color.White;
+
 		public const byte MAX_KPS_COLORS = 30;
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
@@ -245,7 +247,7 @@ namespace osukps {
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
 			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
 			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
-			WritePrivateProfileString("Colors", "fg", KpsButton.ForeColor.ToArgb().ToString(), settingsFile);
+			WritePrivateProfileString("Colors", "fg", frmMain.FgColor.ToArgb().ToString(), settingsFile);
 			WritePrivateProfileString("Colors", "bg", BackColor.ToArgb().ToString(), settingsFile);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
@@ -284,7 +286,7 @@ namespace osukps {
 				}
 				GetPrivateProfileString(section = "Colors", key = "fg", "-1", temp, 32, settingsFile);
 				if (int.TryParse(temp.ToString(), out tmpi)) {
-					KpsButton.ForeColor = Color.FromArgb(tmpi);
+					frmMain.FgColor = Color.FromArgb(tmpi);
 				}
 				GetPrivateProfileString(section = "Colors", key = "bg", "-16777216", temp, 32, settingsFile);
 				if (int.TryParse(temp.ToString(), out tmpi)) {
@@ -555,7 +557,7 @@ namespace osukps {
 			if (newcol == null) {
 				return;
 			}
-			KpsButton.ForeColor = (Color) newcol;
+			frmMain.FgColor = (Color) newcol;
 			OnColorsUpdated();
 			settingsModified = true;
 		}
@@ -564,7 +566,7 @@ namespace osukps {
 			for (int i = 0; i < MAX_BUTTONS; i++) {
 				btns[i].OnForeColorChange();
 			}
-			lblTotal.ForeColor = KpsButton.ForeColor;
+			lblTotal.ForeColor = frmMain.FgColor;
 			pnlInfo.BackColor = BackColor;
 			pnlKeys.BackColor = BackColor;
 		}

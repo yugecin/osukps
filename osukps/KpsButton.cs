@@ -6,8 +6,6 @@ namespace osukps {
 
 	public class KpsButton : Panel {
 
-		public static Color ForeColor = Color.White;
-
 		private Label label;
 		public IKeyHandler keyhandler;
 		private int colortimer;
@@ -53,7 +51,7 @@ namespace osukps {
 			label.TextAlign = ContentAlignment.MiddleCenter;
 			label.ForeColor = Color.White;
 			label.Click += KpsButton_Click;
-			label.ForeColor = KpsButton.ForeColor;
+			label.ForeColor = frmMain.FgColor;
 			FontHandler.labels.Add(label);
 			Controls.Add(label);
 		}
@@ -110,7 +108,7 @@ namespace osukps {
 		}
 
 		public void OnForeColorChange() {
-			label.ForeColor = KpsButton.ForeColor;
+			label.ForeColor = frmMain.FgColor;
 		}
 
 	}
