@@ -32,6 +32,7 @@
 			this.rnum = new System.Windows.Forms.NumericUpDown();
 			this.gnum = new System.Windows.Forms.NumericUpDown();
 			this.bnum = new System.Windows.Forms.NumericUpDown();
+			this.txtHex = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.rnum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gnum)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bnum)).BeginInit();
@@ -56,7 +57,7 @@
 			this.gscroll.Maximum = 255;
 			this.gscroll.Name = "gscroll";
 			this.gscroll.Size = new System.Drawing.Size(304, 16);
-			this.gscroll.TabIndex = 1;
+			this.gscroll.TabIndex = 0;
 			this.gscroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.gscroll_Scroll);
 			// 
 			// bscroll
@@ -67,7 +68,7 @@
 			this.bscroll.Maximum = 255;
 			this.bscroll.Name = "bscroll";
 			this.bscroll.Size = new System.Drawing.Size(304, 16);
-			this.bscroll.TabIndex = 2;
+			this.bscroll.TabIndex = 0;
 			this.bscroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.bscroll_Scroll);
 			// 
 			// btnCancel
@@ -77,7 +78,7 @@
 			this.btnCancel.Location = new System.Drawing.Point(12, 143);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(393, 23);
-			this.btnCancel.TabIndex = 4;
+			this.btnCancel.TabIndex = 6;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -89,7 +90,7 @@
 			this.btnOk.Location = new System.Drawing.Point(12, 114);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(393, 23);
-			this.btnOk.TabIndex = 3;
+			this.btnOk.TabIndex = 5;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -98,10 +99,9 @@
 			// 
 			this.preview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.preview.Location = new System.Drawing.Point(9, 88);
-			this.preview.MinimumSize = new System.Drawing.Size(396, 23);
+			this.preview.Location = new System.Drawing.Point(101, 88);
 			this.preview.Name = "preview";
-			this.preview.Size = new System.Drawing.Size(396, 23);
+			this.preview.Size = new System.Drawing.Size(304, 23);
 			this.preview.TabIndex = 5;
 			// 
 			// rnum
@@ -113,8 +113,8 @@
             0,
             0});
 			this.rnum.Name = "rnum";
-			this.rnum.Size = new System.Drawing.Size(86, 20);
-			this.rnum.TabIndex = 6;
+			this.rnum.Size = new System.Drawing.Size(86, 21);
+			this.rnum.TabIndex = 1;
 			this.rnum.ValueChanged += new System.EventHandler(this.rnum_ValueChanged);
 			// 
 			// gnum
@@ -126,8 +126,8 @@
             0,
             0});
 			this.gnum.Name = "gnum";
-			this.gnum.Size = new System.Drawing.Size(86, 20);
-			this.gnum.TabIndex = 7;
+			this.gnum.Size = new System.Drawing.Size(86, 21);
+			this.gnum.TabIndex = 2;
 			this.gnum.ValueChanged += new System.EventHandler(this.gnum_ValueChanged);
 			// 
 			// bnum
@@ -139,15 +139,26 @@
             0,
             0});
 			this.bnum.Name = "bnum";
-			this.bnum.Size = new System.Drawing.Size(86, 20);
-			this.bnum.TabIndex = 8;
+			this.bnum.Size = new System.Drawing.Size(86, 21);
+			this.bnum.TabIndex = 3;
 			this.bnum.ValueChanged += new System.EventHandler(this.bnum_ValueChanged);
+			// 
+			// txtHex
+			// 
+			this.txtHex.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtHex.Location = new System.Drawing.Point(12, 91);
+			this.txtHex.Name = "txtHex";
+			this.txtHex.Size = new System.Drawing.Size(86, 20);
+			this.txtHex.TabIndex = 4;
+			this.txtHex.Text = "000000";
+			this.txtHex.TextChanged += new System.EventHandler(this.txtHex_TextChanged);
 			// 
 			// frmColorPicker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(417, 178);
+			this.Controls.Add(this.txtHex);
 			this.Controls.Add(this.bnum);
 			this.Controls.Add(this.gnum);
 			this.Controls.Add(this.rnum);
@@ -157,6 +168,7 @@
 			this.Controls.Add(this.bscroll);
 			this.Controls.Add(this.gscroll);
 			this.Controls.Add(this.rscroll);
+			this.Font = new System.Drawing.Font("Tahoma", 8.25F);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "frmColorPicker";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -167,6 +179,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gnum)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bnum)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -181,5 +194,6 @@
 		private System.Windows.Forms.NumericUpDown rnum;
 		private System.Windows.Forms.NumericUpDown gnum;
 		private System.Windows.Forms.NumericUpDown bnum;
+		private System.Windows.Forms.TextBox txtHex;
 	}
 }
