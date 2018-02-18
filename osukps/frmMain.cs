@@ -328,7 +328,7 @@ namespace osukps {
 			}
 		}
 
-		private void changeInactiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void tmiEditGlobalInactiveColor_Click(object sender, EventArgs e) {
 			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.inactive);
 			if (newcol == null) {
@@ -341,7 +341,7 @@ namespace osukps {
 			settingsModified = true;
 		}
 
-		private void changeActiveColorToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void tmiEditGlobalActiveColor_Click(object sender, EventArgs e) {
 			DialogPositioner.From(this);
 			Color? newcol = frmColorPicker.ShowAndEdit(btns[0].color.active);
 			if (newcol == null) {
@@ -490,7 +490,7 @@ namespace osukps {
 			saveSettings();
 		}
 
-		private void editKPSColorsToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void tmiEditKpsColors_Click(object sender, EventArgs e) {
 			DialogPositioner.From(this);
 			DialogPositioner.preferSouth = true;
 			frmKps k = new frmKps();

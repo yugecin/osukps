@@ -32,9 +32,9 @@
 			this.buttonCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.hideButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-			this.editKPSColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.changeInactiveColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.changeActiveColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiEditKpsColors = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiEditGlobalInactiveColor = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiEditGlobalActiveColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsiReset = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsiResetKeys = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,11 +122,11 @@
             this.buttonCountToolStripMenuItem,
             this.hideButtonsToolStripMenuItem,
             this.toolStripSeparator7,
-            this.editKPSColorsToolStripMenuItem,
+            this.tmiEditKpsColors,
             this.tmiEditBackColor,
             this.tmiEditForeColor,
-            this.changeInactiveColorToolStripMenuItem,
-            this.changeActiveColorToolStripMenuItem,
+            this.tmiEditGlobalInactiveColor,
+            this.tmiEditGlobalActiveColor,
             this.toolStripSeparator2,
             this.tsiReset,
             this.toolStripSeparator1,
@@ -146,52 +146,52 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(184, 458);
+			this.cms.Size = new System.Drawing.Size(165, 458);
 			this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
 			// 
 			// buttonCountToolStripMenuItem
 			// 
 			this.buttonCountToolStripMenuItem.Name = "buttonCountToolStripMenuItem";
-			this.buttonCountToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.buttonCountToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.buttonCountToolStripMenuItem.Text = "Button count";
 			// 
 			// hideButtonsToolStripMenuItem
 			// 
 			this.hideButtonsToolStripMenuItem.Name = "hideButtonsToolStripMenuItem";
-			this.hideButtonsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.hideButtonsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.hideButtonsToolStripMenuItem.Text = "Hide buttons";
 			this.hideButtonsToolStripMenuItem.Click += new System.EventHandler(this.hideButtonsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator7
 			// 
 			this.toolStripSeparator7.Name = "toolStripSeparator7";
-			this.toolStripSeparator7.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
 			// 
-			// editKPSColorsToolStripMenuItem
+			// tmiEditKpsColors
 			// 
-			this.editKPSColorsToolStripMenuItem.Name = "editKPSColorsToolStripMenuItem";
-			this.editKPSColorsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-			this.editKPSColorsToolStripMenuItem.Text = "Edit KPS colors";
-			this.editKPSColorsToolStripMenuItem.Click += new System.EventHandler(this.editKPSColorsToolStripMenuItem_Click);
+			this.tmiEditKpsColors.Name = "tmiEditKpsColors";
+			this.tmiEditKpsColors.Size = new System.Drawing.Size(164, 22);
+			this.tmiEditKpsColors.Text = "Edit KPS colors";
+			this.tmiEditKpsColors.Click += new System.EventHandler(this.tmiEditKpsColors_Click);
 			// 
-			// changeInactiveColorToolStripMenuItem
+			// tmiEditGlobalInactiveColor
 			// 
-			this.changeInactiveColorToolStripMenuItem.Name = "changeInactiveColorToolStripMenuItem";
-			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-			this.changeInactiveColorToolStripMenuItem.Text = "Change global inactive color";
-			this.changeInactiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeInactiveColorToolStripMenuItem_Click);
+			this.tmiEditGlobalInactiveColor.Name = "tmiEditGlobalInactiveColor";
+			this.tmiEditGlobalInactiveColor.Size = new System.Drawing.Size(164, 22);
+			this.tmiEditGlobalInactiveColor.Text = "Edit global inactive color";
+			this.tmiEditGlobalInactiveColor.Click += new System.EventHandler(this.tmiEditGlobalInactiveColor_Click);
 			// 
-			// changeActiveColorToolStripMenuItem
+			// tmiEditGlobalActiveColor
 			// 
-			this.changeActiveColorToolStripMenuItem.Name = "changeActiveColorToolStripMenuItem";
-			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-			this.changeActiveColorToolStripMenuItem.Text = "Change global active color";
-			this.changeActiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeActiveColorToolStripMenuItem_Click);
+			this.tmiEditGlobalActiveColor.Name = "tmiEditGlobalActiveColor";
+			this.tmiEditGlobalActiveColor.Size = new System.Drawing.Size(164, 22);
+			this.tmiEditGlobalActiveColor.Text = "Edit global active color";
+			this.tmiEditGlobalActiveColor.Click += new System.EventHandler(this.tmiEditGlobalActiveColor_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
 			// 
 			// tsiReset
 			// 
@@ -200,7 +200,7 @@
             this.resetToolStripMenuItem,
             this.resetAllToolStripMenuItem});
 			this.tsiReset.Name = "tsiReset";
-			this.tsiReset.Size = new System.Drawing.Size(183, 22);
+			this.tsiReset.Size = new System.Drawing.Size(164, 22);
 			this.tsiReset.Text = "Reset";
 			// 
 			// tsiResetKeys
@@ -227,14 +227,14 @@
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
 			// 
 			// startStopRecHotkeyToolStripMenuItem
 			// 
 			this.startStopRecHotkeyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.disabledToolStripMenuItem});
 			this.startStopRecHotkeyToolStripMenuItem.Name = "startStopRecHotkeyToolStripMenuItem";
-			this.startStopRecHotkeyToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.startStopRecHotkeyToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.startStopRecHotkeyToolStripMenuItem.Text = "Start/Stop rec hotkey";
 			// 
 			// disabledToolStripMenuItem
@@ -250,21 +250,21 @@
 			// cmsStartStopRecording
 			// 
 			this.cmsStartStopRecording.Name = "cmsStartStopRecording";
-			this.cmsStartStopRecording.Size = new System.Drawing.Size(183, 22);
+			this.cmsStartStopRecording.Size = new System.Drawing.Size(164, 22);
 			this.cmsStartStopRecording.Text = "Start recording";
 			this.cmsStartStopRecording.Click += new System.EventHandler(this.cmsStartStopRecording_Click);
 			// 
 			// cmsPlaybackRecording
 			// 
 			this.cmsPlaybackRecording.Name = "cmsPlaybackRecording";
-			this.cmsPlaybackRecording.Size = new System.Drawing.Size(183, 22);
+			this.cmsPlaybackRecording.Size = new System.Drawing.Size(164, 22);
 			this.cmsPlaybackRecording.Text = "Playback recording";
 			this.cmsPlaybackRecording.Click += new System.EventHandler(this.cmsPlaybackRecording_Click);
 			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator3.Size = new System.Drawing.Size(161, 6);
 			// 
 			// saveKeySettingsToolStripMenuItem
 			// 
@@ -273,7 +273,7 @@
             this.currentConfigurationToolStripMenuItem,
             this.toolStripSeparator6});
 			this.saveKeySettingsToolStripMenuItem.Name = "saveKeySettingsToolStripMenuItem";
-			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.saveKeySettingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.saveKeySettingsToolStripMenuItem.Text = "Save Key Setup";
 			this.saveKeySettingsToolStripMenuItem.Click += new System.EventHandler(this.saveKeySettingsToolStripMenuItem_Click);
 			// 
@@ -301,7 +301,7 @@
 			this.loadKeySetupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.noConfigurationsFoundToolStripMenuItem});
 			this.loadKeySetupToolStripMenuItem.Name = "loadKeySetupToolStripMenuItem";
-			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.loadKeySetupToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.loadKeySetupToolStripMenuItem.Text = "Load Key Setup";
 			this.loadKeySetupToolStripMenuItem.Click += new System.EventHandler(this.loadKeySetupToolStripMenuItem_Click);
 			// 
@@ -315,45 +315,45 @@
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator5.Size = new System.Drawing.Size(161, 6);
 			// 
 			// settingsToolStripMenuItem
 			// 
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
 			this.settingsToolStripMenuItem.Visible = false;
 			// 
 			// changeFontToolStripMenuItem
 			// 
 			this.changeFontToolStripMenuItem.Name = "changeFontToolStripMenuItem";
-			this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.changeFontToolStripMenuItem.Text = "Change font";
 			this.changeFontToolStripMenuItem.Click += new System.EventHandler(this.changeFontToolStripMenuItem_Click);
 			// 
 			// resetFontToolStripMenuItem
 			// 
 			this.resetFontToolStripMenuItem.Name = "resetFontToolStripMenuItem";
-			this.resetFontToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.resetFontToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.resetFontToolStripMenuItem.Text = "Reset font";
 			this.resetFontToolStripMenuItem.Click += new System.EventHandler(this.resetFontToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator4
 			// 
 			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
+			this.toolStripSeparator4.Size = new System.Drawing.Size(161, 6);
 			// 
 			// tsiAbout
 			// 
 			this.tsiAbout.Name = "tsiAbout";
-			this.tsiAbout.Size = new System.Drawing.Size(183, 22);
+			this.tsiAbout.Size = new System.Drawing.Size(164, 22);
 			this.tsiAbout.Text = "About";
 			this.tsiAbout.Click += new System.EventHandler(this.tsiAbout_Click);
 			// 
 			// tsiExit
 			// 
 			this.tsiExit.Name = "tsiExit";
-			this.tsiExit.Size = new System.Drawing.Size(183, 22);
+			this.tsiExit.Size = new System.Drawing.Size(164, 22);
 			this.tsiExit.Text = "&Exit";
 			this.tsiExit.Click += new System.EventHandler(this.tsiExit_Click);
 			// 
@@ -366,14 +366,14 @@
 			// tmiEditBackColor
 			// 
 			this.tmiEditBackColor.Name = "tmiEditBackColor";
-			this.tmiEditBackColor.Size = new System.Drawing.Size(183, 22);
+			this.tmiEditBackColor.Size = new System.Drawing.Size(164, 22);
 			this.tmiEditBackColor.Text = "Edit background color";
 			this.tmiEditBackColor.Click += new System.EventHandler(this.tmiEditBackColor_Click);
 			// 
 			// tmiEditForeColor
 			// 
 			this.tmiEditForeColor.Name = "tmiEditForeColor";
-			this.tmiEditForeColor.Size = new System.Drawing.Size(183, 22);
+			this.tmiEditForeColor.Size = new System.Drawing.Size(164, 22);
 			this.tmiEditForeColor.Text = "Edit foreground color";
 			this.tmiEditForeColor.Click += new System.EventHandler(this.tmiEditForeColor_Click);
 			// 
@@ -420,10 +420,10 @@
 		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem loadKeySetupToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem changeInactiveColorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditGlobalInactiveColor;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem resetAllToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem changeActiveColorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditGlobalActiveColor;
 		private System.Windows.Forms.ToolStripMenuItem buttonCountToolStripMenuItem;
 		private System.Windows.Forms.FontDialog fontDialog;
 		private System.Windows.Forms.ToolStripMenuItem changeFontToolStripMenuItem;
@@ -442,7 +442,7 @@
 		private System.Windows.Forms.ToolStripMenuItem noConfigurationsFoundToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem hideButtonsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-		private System.Windows.Forms.ToolStripMenuItem editKPSColorsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditKpsColors;
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditBackColor;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditForeColor;
