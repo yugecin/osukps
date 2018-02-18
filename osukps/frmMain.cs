@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace osukps {
 	public partial class frmMain : Form {
 
-		public const byte MAX_KPS_COLORS = 10;
+		public const byte MAX_KPS_COLORS = 30;
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
 		private KpsHandler kpsHandler;
