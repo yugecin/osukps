@@ -89,6 +89,12 @@
     <Compile Include="frmGetKey.Designer.cs">
       <DependentUpon>frmGetKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmKps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKps.Designer.cs">
+      <DependentUpon>frmKps.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="KpsButtonColor.cs" />
+    <Compile Include="KPSCOLOR.cs" />
+    <Compile Include="KpsColorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KpsColorControl.Designer.cs">
+      <DependentUpon>KpsColorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="KpsHandler.cs" />
     <Compile Include="NoKeyHandler.cs" />
     <Compile Include="Program.cs" />
@@ -128,6 +141,9 @@
     <EmbeddedResource Include="frmGetKey.resx">
       <DependentUpon>frmGetKey.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmKps.resx">
+      <DependentUpon>frmKps.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetting.resx">
       <DependentUpon>frmSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KpsColorControl.resx">
+      <DependentUpon>KpsColorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

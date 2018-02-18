@@ -49,12 +49,12 @@ namespace osukps {
 			float progress = 0;
 			int i = frmMain.kpscolorscount;
 			if (i > 0) {
-				frmMain.KPSCOLOR kc = frmMain.kpscolors[i - 1];
+				KPSCOLOR kc = frmMain.kpscolors[i - 1];
 				nextcol = kc.color;
 				nextkps = kc.kps;
 			}
 			while (--i >= 0) {
-				frmMain.KPSCOLOR kc = frmMain.kpscolors[i];
+				KPSCOLOR kc = frmMain.kpscolors[i];
 				if (kps >= kc.kps) {
 					prevcol = kc.color;
 					if (kps != 0) {
