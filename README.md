@@ -4,7 +4,7 @@ A little program that shows keystates, keys per second and total keys for rythm 
 ## Preview
 ![preview](/preview.gif?raw=true)  
 Extra buttons can be added or removed (minimum 1, maximum 10).  
-Button/text/kps colors can be customized
+Button/text/kps colors can be customized.
 
 ## Download
 See [Releases](https://github.com/yugecin/osukps/releases)
