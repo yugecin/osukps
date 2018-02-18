@@ -12,6 +12,7 @@ using System.Windows.Forms;
 namespace osukps {
 	public partial class frmMain : Form {
 
+		public const byte MAX_KPS_COLORS = 10;
 		private const byte MAX_BUTTONS = 10;
 		private const byte INITIAL_BUTTONS = 4;
 		private KpsHandler kpsHandler;
@@ -22,6 +23,9 @@ namespace osukps {
 		private int reckey;
 		private string settingsFile = "osukps.ini";
 
+		public static KPSCOLOR[] kpscolors = new KPSCOLOR[MAX_KPS_COLORS];
+		public static int kpscolorscount;
+
 		public frmMain() {
 			CultureInfo customCulture = (CultureInfo) Thread.CurrentThread.CurrentCulture.Clone();
 			customCulture.NumberFormat.NumberDecimalSeparator = ".";
@@ -30,6 +34,15 @@ namespace osukps {
 			InitializeComponent();
 			InitializeButtonCountComponent();
 			InitializeStartStopRecHotkeyComponent();
+
+			kpscolors[0] = new KPSCOLOR();
+			kpscolors[0].kps = 5;
+			kpscolors[0].color = Color.FromArgb(255, 0, 190, 255);
+			kpscolors[0].smoothen = false;
+			kpscolors[1].kps = 10;
+			kpscolors[1].color = Color.FromArgb(255, 248, 0, 0);
+			kpscolors[1].smoothen = false;
+			kpscolorscount = 2;
 
 			FontHandler.labels.Add(lblKps);
 			FontHandler.labels.Add(lblTotal);
@@ -231,6 +244,7 @@ namespace osukps {
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
 			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
+			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
@@ -258,6 +272,11 @@ namespace osukps {
 				GetPrivateProfileString("Stuff", "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
 				UpdateSSRHotkeyActiveItem();
+				GetPrivateProfileString("Colors", "kps", "", temp, 128, settingsFile);
+				string kpscols = temp.ToString();
+				if (kpscols.Length > 0) {
+					LoadKpsColors(kpscols);
+				}
 
 				for (var i = 0; i < MAX_BUTTONS; i++) {
 					GetPrivateProfileString("KEY", "key" + (i + 1), "", temp, 32, settingsFile);
@@ -450,6 +469,52 @@ namespace osukps {
 			}
 			changeCurrentSettingsFile(name + ".ini");
 			saveSettings();
+		}
+
+		private void editKPSColorsToolStripMenuItem_Click(object sender, EventArgs e) {
+			frmKps k = new frmKps();
+			if (k.ShowDialog() != DialogResult.OK) {
+				return;
+			}
+
+			KPSCOLOR[] newcolors = k.GetNewColors();
+			if (SerializeKpsColors(kpscolors, kpscolorscount) == SerializeKpsColors(newcolors, newcolors.Length)) {
+				return;
+			}
+
+			for (int i = 0; i < newcolors.Length; i++) {
+				kpscolors[i] = newcolors[i];
+			}
+			kpscolorscount = newcolors.Length;
+
+			settingsModified = true;
+		}
+
+		private string SerializeKpsColors(KPSCOLOR[] colors, int count) {
+			StringBuilder b = new StringBuilder();
+
+			for (int i = 0; i < count; i++) {
+				KPSCOLOR c = colors[i];
+				b.Append("|").Append(c.kps).Append(",").Append(c.color.ToArgb()).Append(",").Append(c.smoothen);
+			}
+
+			if (b.Length != 0) {
+			     b.Remove(0, 1);
+			}
+
+			return b.ToString();
+		}
+
+		private void LoadKpsColors(string serializedInput) {
+			string[] colors = serializedInput.Split('|');
+			kpscolorscount = colors.Length;
+
+			for (int i = 0; i < colors.Length; i++) {
+				string[] parts = colors[i].Split(',');
+				kpscolors[i].kps = int.Parse(parts[0]);
+				kpscolors[i].color = Color.FromArgb(int.Parse(parts[1]));
+				kpscolors[i].smoothen = bool.Parse(parts[2]);
+			}
 		}
 
 	}

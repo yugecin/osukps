@@ -58,6 +58,8 @@
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
 			this.hideButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+			this.editKPSColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -116,6 +118,8 @@
 			this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonCountToolStripMenuItem,
             this.hideButtonsToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.editKPSColorsToolStripMenuItem,
             this.changeInactiveColorToolStripMenuItem,
             this.changeActiveColorToolStripMenuItem,
             this.toolStripSeparator2,
@@ -139,7 +143,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(156, 430);
+			this.cms.Size = new System.Drawing.Size(184, 458);
 			this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
 			// 
 			// buttonCountToolStripMenuItem
@@ -151,15 +155,15 @@
 			// changeInactiveColorToolStripMenuItem
 			// 
 			this.changeInactiveColorToolStripMenuItem.Name = "changeInactiveColorToolStripMenuItem";
-			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-			this.changeInactiveColorToolStripMenuItem.Text = "Change inactive color";
+			this.changeInactiveColorToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.changeInactiveColorToolStripMenuItem.Text = "Change global inactive color";
 			this.changeInactiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeInactiveColorToolStripMenuItem_Click);
 			// 
 			// changeActiveColorToolStripMenuItem
 			// 
 			this.changeActiveColorToolStripMenuItem.Name = "changeActiveColorToolStripMenuItem";
-			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-			this.changeActiveColorToolStripMenuItem.Text = "Change active color";
+			this.changeActiveColorToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.changeActiveColorToolStripMenuItem.Text = "Change global active color";
 			this.changeActiveColorToolStripMenuItem.Click += new System.EventHandler(this.changeActiveColorToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
@@ -334,6 +338,18 @@
 			this.hideButtonsToolStripMenuItem.Text = "Hide buttons";
 			this.hideButtonsToolStripMenuItem.Click += new System.EventHandler(this.hideButtonsToolStripMenuItem_Click);
 			// 
+			// toolStripSeparator7
+			// 
+			this.toolStripSeparator7.Name = "toolStripSeparator7";
+			this.toolStripSeparator7.Size = new System.Drawing.Size(180, 6);
+			// 
+			// editKPSColorsToolStripMenuItem
+			// 
+			this.editKPSColorsToolStripMenuItem.Name = "editKPSColorsToolStripMenuItem";
+			this.editKPSColorsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+			this.editKPSColorsToolStripMenuItem.Text = "Edit KPS colors";
+			this.editKPSColorsToolStripMenuItem.Click += new System.EventHandler(this.editKPSColorsToolStripMenuItem_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,5 +414,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripMenuItem noConfigurationsFoundToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem hideButtonsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+		private System.Windows.Forms.ToolStripMenuItem editKPSColorsToolStripMenuItem;
 	}
 }

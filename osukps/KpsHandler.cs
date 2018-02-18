@@ -41,21 +41,50 @@ namespace osukps {
 			if (kps > max) {
 				max = kps;
 			}
-			if (kps >= 10) {
-				lblKps.ForeColor = Color.FromArgb(255, 248, 0, 0);
-			} else if (kps >= 5) {
-				lblKps.ForeColor = Color.FromArgb(255, 0, 190, 255);
-			} else {
-				lblKps.ForeColor = Color.White;
+
+			bool smoothen = false;
+			Color nextcol = Color.White;
+			Color prevcol = nextcol;
+			int nextkps = 0;
+			float progress = 0;
+			int i = frmMain.kpscolorscount;
+			if (i > 0) {
+				KPSCOLOR kc = frmMain.kpscolors[i - 1];
+				nextcol = kc.color;
+				nextkps = kc.kps;
 			}
+			while (--i >= 0) {
+				KPSCOLOR kc = frmMain.kpscolors[i];
+				if (kps >= kc.kps) {
+					prevcol = kc.color;
+					if (kps != 0) {
+						progress = (kps - kc.kps) / (float) (nextkps - kc.kps);
+					}
+					break;
+				}
+				nextcol = kc.color;
+				nextkps = kc.kps;
+				smoothen = kc.smoothen;
+				if (i == 0) {
+					prevcol = Color.White;
+					progress = kps / (float) (nextkps);
+				}
+			}
+			if (smoothen) {
+				prevcol = Color.FromArgb(
+					255,
+					prevcol.R + (int) ((nextcol.R - prevcol.R) * progress),
+					prevcol.G + (int) ((nextcol.G - prevcol.G) * progress),
+					prevcol.B + (int) ((nextcol.B - prevcol.B) * progress)
+				);
+			}
+			lblKps.ForeColor = prevcol;
 
 			if (kps == 0) {
 				lblKps.Text = string.Format("{0} Max", max);
 			} else lblKps.Text = string.Format("{0} Kps", kps);
 
 			lblTotal.Text = total.ToString();
-
-			//frmMain.kpsmax(kps);
 		}
 
 		public void SetTotal(int total) {
