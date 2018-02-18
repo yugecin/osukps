@@ -61,6 +61,8 @@
 			this.tsiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmrProcess = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog = new System.Windows.Forms.FontDialog();
+			this.tmiEditBackColor = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiEditForeColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -121,6 +123,8 @@
             this.hideButtonsToolStripMenuItem,
             this.toolStripSeparator7,
             this.editKPSColorsToolStripMenuItem,
+            this.tmiEditBackColor,
+            this.tmiEditForeColor,
             this.changeInactiveColorToolStripMenuItem,
             this.changeActiveColorToolStripMenuItem,
             this.toolStripSeparator2,
@@ -142,7 +146,7 @@
 			this.cms.Name = "cms";
 			this.cms.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
 			this.cms.ShowImageMargin = false;
-			this.cms.Size = new System.Drawing.Size(184, 414);
+			this.cms.Size = new System.Drawing.Size(184, 458);
 			this.cms.Opening += new System.ComponentModel.CancelEventHandler(this.cms_Opening);
 			// 
 			// buttonCountToolStripMenuItem
@@ -202,21 +206,21 @@
 			// tsiResetKeys
 			// 
 			this.tsiResetKeys.Name = "tsiResetKeys";
-			this.tsiResetKeys.Size = new System.Drawing.Size(152, 22);
+			this.tsiResetKeys.Size = new System.Drawing.Size(123, 22);
 			this.tsiResetKeys.Text = "Total keys";
 			this.tsiResetKeys.Click += new System.EventHandler(this.tsiResetKeys_Click);
 			// 
 			// resetToolStripMenuItem
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
 			this.resetToolStripMenuItem.Text = "Max KPS";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.tsiResetMaxKPS_Click);
 			// 
 			// resetAllToolStripMenuItem
 			// 
 			this.resetAllToolStripMenuItem.Name = "resetAllToolStripMenuItem";
-			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.resetAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
 			this.resetAllToolStripMenuItem.Text = "Both";
 			this.resetAllToolStripMenuItem.Click += new System.EventHandler(this.tsiResetBoth_Click);
 			// 
@@ -359,6 +363,20 @@
 			this.tmrProcess.Interval = 2;
 			this.tmrProcess.Tick += new System.EventHandler(this.tmrProcess_Tick);
 			// 
+			// tmiEditBackColor
+			// 
+			this.tmiEditBackColor.Name = "tmiEditBackColor";
+			this.tmiEditBackColor.Size = new System.Drawing.Size(183, 22);
+			this.tmiEditBackColor.Text = "Edit background color";
+			this.tmiEditBackColor.Click += new System.EventHandler(this.tmiEditBackColor_Click);
+			// 
+			// tmiEditForeColor
+			// 
+			this.tmiEditForeColor.Name = "tmiEditForeColor";
+			this.tmiEditForeColor.Size = new System.Drawing.Size(183, 22);
+			this.tmiEditForeColor.Text = "Edit foreground color";
+			this.tmiEditForeColor.Click += new System.EventHandler(this.tmiEditForeColor_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,5 +444,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 		private System.Windows.Forms.ToolStripMenuItem editKPSColorsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditBackColor;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditForeColor;
 	}
 }

@@ -75,6 +75,7 @@ namespace osukps {
 			if (FontHandler.currentFont == null) {
 				FontHandler.resetFont();
 			}
+			OnColorsUpdated();
 		}
 
 		private void InitializeButtonCountComponent() {
@@ -244,6 +245,8 @@ namespace osukps {
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
 			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
 			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
+			WritePrivateProfileString("Colors", "fg", KpsButton.ForeColor.ToArgb().ToString(), settingsFile);
+			WritePrivateProfileString("Colors", "bg", BackColor.ToArgb().ToString(), settingsFile);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
@@ -257,6 +260,7 @@ namespace osukps {
 
 		private void loadSettings() {
 			string settingsFile = "./" + this.settingsFile;
+			int tmpi;
 			bool tmpb;
 			string section = "";
 			string key = "";
@@ -277,6 +281,15 @@ namespace osukps {
 				string kpscols = temp.ToString();
 				if (kpscols.Length > 0) {
 					LoadKpsColors(kpscols);
+				}
+				GetPrivateProfileString(section = "Colors", key = "fg", "-1", temp, 32, settingsFile);
+				if (int.TryParse(temp.ToString(), out tmpi)) {
+					KpsButton.ForeColor = Color.FromArgb(tmpi);
+				}
+				GetPrivateProfileString(section = "Colors", key = "bg", "-16777216", temp, 32, settingsFile);
+				if (int.TryParse(temp.ToString(), out tmpi)) {
+					BackColor = Color.FromArgb(tmpi);
+					pnlInfo.BackColor = BackColor;
 				}
 
 				for (var i = 0; i < MAX_BUTTONS; i++) {
@@ -523,6 +536,37 @@ namespace osukps {
 				kpscolors[i].color = Color.FromArgb(int.Parse(parts[1]));
 				kpscolors[i].smoothen = bool.Parse(parts[2]);
 			}
+		}
+
+		private void tmiEditBackColor_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
+			Color? newcol = frmColorPicker.ShowAndEdit(BackColor);
+			if (newcol == null) {
+				return;
+			}
+			BackColor = (Color) newcol;
+			OnColorsUpdated();
+			settingsModified = true;
+		}
+
+		private void tmiEditForeColor_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
+			Color? newcol = frmColorPicker.ShowAndEdit(lblTotal.ForeColor);
+			if (newcol == null) {
+				return;
+			}
+			KpsButton.ForeColor = (Color) newcol;
+			OnColorsUpdated();
+			settingsModified = true;
+		}
+
+		private void OnColorsUpdated() {
+			for (int i = 0; i < MAX_BUTTONS; i++) {
+				btns[i].OnForeColorChange();
+			}
+			lblTotal.ForeColor = KpsButton.ForeColor;
+			pnlInfo.BackColor = BackColor;
+			pnlKeys.BackColor = BackColor;
 		}
 
 	}

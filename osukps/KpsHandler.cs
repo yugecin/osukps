@@ -43,7 +43,7 @@ namespace osukps {
 			}
 
 			bool smoothen = false;
-			Color nextcol = Color.White;
+			Color nextcol = KpsButton.ForeColor;
 			Color prevcol = nextcol;
 			int nextkps = 0;
 			float progress = 0;
@@ -66,7 +66,7 @@ namespace osukps {
 				nextkps = kc.kps;
 				smoothen = kc.smoothen;
 				if (i == 0) {
-					prevcol = Color.White;
+					prevcol = KpsButton.ForeColor;
 					progress = kps / (float) (nextkps);
 				}
 			}
